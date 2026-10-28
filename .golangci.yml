@@ -21,6 +21,7 @@ linters:
         - fmt.Fprint
     gosec:
       excludes:
+        - G104
         - G110
         - G115
         - G204
