@@ -126,10 +126,15 @@ func TestScenarios(t *testing.T) {
 }
 
 func run(t *testing.T, builder string, s scenario) {
-	image := "local/it-" + s.name + ":" + strconv.FormatInt(time.Now().UnixNano(), 36)
-	t.Cleanup(func() { exec.Command("docker", "rmi", "-f", image).Run() })
+	image := "local/it-" + s.name + ":latest"
+	buildCache, launchCache := "it-"+s.name+"-build", "it-"+s.name+"-launch"
+	t.Cleanup(func() {
+		exec.Command("docker", "rmi", "-f", image).Run()
+		exec.Command("docker", "volume", "rm", "-f", buildCache, launchCache).Run()
+	})
 
-	args := []string{"build", image, "--path", filepath.Join("..", "samples", s.app), "--builder", builder, "--pull-policy", "if-not-present", "--clear-cache"}
+	args := []string{"build", image, "--path", filepath.Join("..", "samples", s.app), "--builder", builder, "--pull-policy", "if-not-present", "--clear-cache",
+		"--cache", "type=build;format=volume;name=" + buildCache, "--cache", "type=launch;format=volume;name=" + launchCache}
 	for k, v := range s.buildEnv {
 		args = append(args, "--env", k+"="+v)
 	}
