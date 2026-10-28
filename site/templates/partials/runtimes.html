@@ -1,0 +1,11 @@
+{{define "runtimes"}}
+<div class="cards cards-runtimes">
+{{range .Site.Runtimes}}
+  <div class="card card-runtime">
+    <span class="big">{{.Java}}</span>
+    <span class="chip chip-mint">LTS</span>
+    <dl><dt>JDK</dt><dd>{{.JDK}}</dd><dt>JRE</dt><dd>{{.JRE}}</dd></dl>
+  </div>
+{{end}}
+</div>
+{{end}}

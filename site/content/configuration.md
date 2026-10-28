@@ -1,0 +1,69 @@
+title: Configuration
+order: 20
+description: Every environment variable the JVM buildpack understands, generated from buildpack.toml on each release.
+---
+
+Variables prefixed with `BP_` are read while the image is **built**: pass them with `pack build --env NAME=value` or a `project.toml`. Variables prefixed with `BPL_` are read every time the container **starts**: set them with `docker run -e`, a Kubernetes `env` entry or a ConfigMap. Changing a `BPL_` variable never needs a rebuild.
+
+## Build-time variables
+
+[[variables build]]
+
+## Launch-time variables
+
+[[variables launch]]
+
+## Examples
+
+Build a Java 17 image that ships the full JDK:
+
+```sh
+pack build my-app --builder ghcr.io/taha2samy-3/wolfi-java-builder:[[latest]] \
+  --env BP_JVM_VERSION=17 --env BP_JVM_TYPE=JDK
+```
+
+Keep the variables in the repository with a `project.toml`:
+
+```toml
+[_]
+schema-version = "0.2"
+
+[[io.buildpacks.build.env]]
+name = "BP_JVM_FIPS_ENABLED"
+value = "true"
+
+[[io.buildpacks.build.env]]
+name = "BP_JVM_VERSION"
+value = "21"
+```
+
+Attach a debugger through `kubectl port-forward` without exposing the port outside the pod:
+
+```sh
+docker run -e BPL_DEBUG_ENABLED=true -e BPL_DEBUG_SUSPEND=false my-app
+kubectl port-forward pod/my-app 8000:8000
+```
+
+Remote JMX and the debug agent bind to `127.0.0.1` by default. Setting `BPL_JMX_HOST` or `BPL_DEBUG_HOST` to another address prints a warning at startup, because neither endpoint has authentication.
+
+## Bindings
+
+The buildpack reads [service bindings](https://servicebinding.io/):
+
+| Type | When | Effect |
+| --- | --- | --- |
+| `ca-certificates` | build and launch | Every PEM certificate in the binding is added to the JVM truststore (BCFKS in FIPS mode). |
+| `dependency-mapping` | build | Each file is named after a dependency SHA-256 and contains a replacement URI, for air-gapped builds. |
+
+```sh
+mkdir -p bindings/corp-ca
+echo ca-certificates > bindings/corp-ca/type
+cp corp-root.pem bindings/corp-ca/
+docker run -v "$PWD/bindings:/bindings:ro" -e SERVICE_BINDING_ROOT=/bindings my-app
+```
+
+Certificates added at launch are written to a copy of the truststore in `/tmp`, so a read-only root filesystem keeps working.
+
+## Mirrors and air-gapped builds
+
+`BP_DEPENDENCY_MIRROR=https://mirror.example.com/deps` replaces the scheme and host of each download, keeping the path. Every download is verified against the SHA-256 pinned in `buildpack.toml` regardless of where it comes from.

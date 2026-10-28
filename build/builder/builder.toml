@@ -23,4 +23,4 @@ description = "Wolfi Java builder: Eclipse Temurin with optional FIPS 140-3 mode
 [[order]]
   [[order.group]]
     id = "taha2samy-3/wolfi-java"
-    version = "0.0.0-dev"
+    version = "dev"

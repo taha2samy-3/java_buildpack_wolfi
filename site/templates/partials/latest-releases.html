@@ -1,0 +1,11 @@
+{{define "latest-releases"}}
+{{if .Site.Releases}}
+<div class="cards">
+{{range $i, $r := .Site.Releases}}{{if lt $i 3}}
+  <a class="card card-link" href="releases.html#{{$r.TagName}}"><span class="chip{{if eq $i 0}} chip-coral{{end}}">{{$r.TagName}}</span><span class="muted">{{$r.PublishedAt.Format "2006-01-02"}}</span></a>
+{{end}}{{end}}
+</div>
+{{else}}
+<p class="muted">The first release is on its way.</p>
+{{end}}
+{{end}}

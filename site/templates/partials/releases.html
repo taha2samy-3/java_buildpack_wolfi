@@ -1,0 +1,19 @@
+{{define "releases"}}
+{{if .Site.Releases}}
+<div class="releases">
+{{range $i, $r := .Site.Releases}}
+  <article class="release{{if eq $i 0}} release-latest{{end}}" id="{{$r.TagName}}">
+    <header>
+      <h2><a href="{{$r.HTMLURL}}">{{$r.TagName}}</a></h2>
+      {{if eq $i 0}}<span class="chip chip-coral">latest</span>{{end}}
+      {{if $r.Prerelease}}<span class="chip chip-yellow">pre-release</span>{{end}}
+      <time datetime="{{$r.PublishedAt.Format "2006-01-02"}}">{{date $r.PublishedAt}}</time>
+    </header>
+    <div class="release-body">{{$r.BodyHTML}}</div>
+  </article>
+{{end}}
+</div>
+{{else}}
+<div class="card card-empty"><p>No releases have been published yet. Releases appear here automatically when a version tag is pushed.</p></div>
+{{end}}
+{{end}}
