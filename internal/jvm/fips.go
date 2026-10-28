@@ -22,7 +22,7 @@ var fipsProperties = []struct{ key, value string }{
 	{"keystore.type", "BCFKS"},
 	{"ssl.KeyManagerFactory.algorithm", "PKIX"},
 	{"ssl.TrustManagerFactory.algorithm", "PKIX"},
-	{"jdk.tls.disabledAlgorithms", "SSLv3, TLSv1, TLSv1.1, DTLSv1.0, RC4, DES, MD5withRSA, DH keySize < 2048, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, ECDH"},
+	{"jdk.tls.disabledAlgorithms", "SSLv3, TLSv1, TLSv1.1, DTLSv1.0, RC4, DES, MD5withRSA, DH keySize < 2048, EC keySize < 224, 3DES_EDE_CBC, anon, NULL"},
 	{"jdk.certpath.disabledAlgorithms", "MD2, MD5, SHA1, RSA keySize < 2048, DSA keySize < 2048, EC keySize < 224"},
 	{"jdk.jar.disabledAlgorithms", "MD2, MD5, RSA keySize < 2048, DSA keySize < 2048, EC keySize < 224"},
 }

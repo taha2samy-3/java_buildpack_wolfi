@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Wolfi Java Buildpack">
-  <rect width="64" height="64" rx="16" fill="#1a1a1a"/>
-  <path d="M32 10 52 20.5 32 31 12 20.5Z" fill="#ff9371"/>
-  <path d="M12 28.5 32 39l20-10.5v5.5L32 44.5 12 34Z" fill="#ffc06c"/>
-  <path d="M12 40.5 32 51l20-10.5V46L32 56.5 12 46Z" fill="#95ffec"/>
-</svg>

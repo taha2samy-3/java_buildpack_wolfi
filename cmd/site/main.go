@@ -14,20 +14,20 @@ func (i *imageFlags) Set(v string) error { *i = append(*i, v); return nil }
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: site build|notes [flags]")
+		fmt.Fprintln(os.Stderr, "usage: site data|notes [flags]")
 		os.Exit(2)
 	}
 	var err error
 	switch os.Args[1] {
-	case "build":
-		fs := flag.NewFlagSet("build", flag.ExitOnError)
+	case "data":
+		fs := flag.NewFlagSet("data", flag.ExitOnError)
 		repo := fs.String("repository", "taha2samy-3/java_buildpack_wolfi", "GitHub repository owner/name")
-		out := fs.String("out", "build/site", "output directory")
+		out := fs.String("out", "site/src/data", "output directory")
 		root := fs.String("root", ".", "repository root")
 		releases := fs.String("releases", "", "read releases from a JSON file instead of the GitHub API")
 		offline := fs.Bool("offline", false, "do not contact the GitHub API")
 		_ = fs.Parse(os.Args[2:])
-		err = Build(Options{Root: *root, Out: *out, Repository: *repo, ReleasesFile: *releases, Offline: *offline, Token: os.Getenv("GITHUB_TOKEN")})
+		err = Export(Options{Root: *root, Out: *out, Repository: *repo, ReleasesFile: *releases, Offline: *offline, Token: os.Getenv("GITHUB_TOKEN")})
 	case "notes":
 		fs := flag.NewFlagSet("notes", flag.ExitOnError)
 		version := fs.String("version", "", "release version without the leading v")
