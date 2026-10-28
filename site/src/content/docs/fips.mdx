@@ -13,7 +13,13 @@ Turn FIPS mode on with `BP_JVM_FIPS_ENABLED=true` at build time. It cannot be sw
 
 ## The validated module
 
-The JVM uses the Bouncy Castle FIPS Java API (BC-FJA) **2.1.1**, NIST CMVP certificate **#4943** (FIPS 140-3, overall level 1). The certificate covers Java 8, 11, 17 and 21. The version is pinned on purpose: newer `bc-fips` patch releases are not covered by the certificate until NIST lists them, so the dependency updater never changes it.
+The JVM uses the Bouncy Castle FIPS Java API (BC-FJA) **2.1.1**, NIST CMVP certificate **#4943** (FIPS 140-3, overall level 1). The certificate lists Java 8, 11, 17 and 21 as tested operational environments. The version is pinned on purpose: newer `bc-fips` patch releases are not covered by the certificate until NIST lists them, so the dependency updater never changes it.
+
+<Callout tone="yellow" title="Java 25">
+
+Java 25 works in FIPS mode and passes the same self-test, but it is not one of the operational environments listed on certificate #4943. Choose Java 8, 11, 17 or 21 when your assessment requires a configuration that is strictly within the certificate.
+
+</Callout>
 
 <FipsModules />
 

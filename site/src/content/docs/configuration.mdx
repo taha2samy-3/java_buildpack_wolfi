@@ -45,6 +45,12 @@ docker run -e BPL_DEBUG_ENABLED=true -e BPL_DEBUG_SUSPEND=false my-app
 kubectl port-forward pod/my-app 8000:8000
 ```
 
+`JAVA_OPTS` is supported for compatibility with other images: its value is appended to `JAVA_TOOL_OPTIONS` when the container starts.
+
+```sh
+docker run -e JAVA_OPTS="-XX:+UseZGC -Dspring.profiles.active=prod" my-app
+```
+
 Remote JMX and the debug agent bind to `127.0.0.1` by default. Setting `BPL_JMX_HOST` or `BPL_DEBUG_HOST` to another address prints a warning at startup, because neither endpoint has authentication.
 
 ## Bindings
