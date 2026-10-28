@@ -18,3 +18,10 @@ updates:
     directories: [/stacks/build, /stacks/run]
     schedule:
       interval: weekly
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: weekly
+    groups:
+      site:
+        patterns: ['*']
