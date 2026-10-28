@@ -1,0 +1,39 @@
+name: Update dependencies
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  temurin:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - run: go run ./cmd/update-deps
+      - run: go test ./internal/manifest/
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ secrets.DEPENDENCY_UPDATE_TOKEN || secrets.GITHUB_TOKEN }}
+          branch: deps/temurin
+          commit-message: 'deps: update Eclipse Temurin releases'
+          title: 'deps: update Eclipse Temurin releases'
+          body: |
+            Automated refresh of the pinned Eclipse Temurin JDK/JRE releases in `buildpacks/jvm/buildpack.toml`.
+            Checksums were cross-checked between the Adoptium API and the GitHub release assets.
+            The Bouncy Castle FIPS module is pinned to its CMVP validated release and is not changed by this job.
+          labels: dependencies
+          delete-branch: true
