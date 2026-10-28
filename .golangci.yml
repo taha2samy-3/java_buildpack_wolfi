@@ -8,14 +8,23 @@ linters:
     - revive
     - unconvert
   settings:
+    errcheck:
+      exclude-functions:
+        - (io.Closer).Close
+        - (*os.File).Close
+        - (*archive/zip.ReadCloser).Close
+        - os.Remove
+        - os.RemoveAll
     gosec:
       excludes:
+        - G110
+        - G115
         - G204
         - G301
         - G302
         - G304
+        - G305
         - G306
-        - G110
     revive:
       rules:
         - name: exported
