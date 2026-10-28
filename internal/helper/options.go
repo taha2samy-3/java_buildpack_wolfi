@@ -176,6 +176,10 @@ func (j JVMOptions) Execute() (map[string]string, error) {
 		flags = append(flags, "-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath="+p)
 	}
 
+	if opts := strings.TrimSpace(j.Getenv("JAVA_OPTS")); opts != "" {
+		flags = append(flags, opts)
+	}
+
 	if len(flags) == 0 {
 		return nil, nil
 	}

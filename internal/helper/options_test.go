@@ -72,3 +72,10 @@ func TestJVMOptionsValidation(t *testing.T) {
 		}
 	}
 }
+
+func TestJVMOptionsJavaOpts(t *testing.T) {
+	got, _, err := options(map[string]string{"JAVA_TOOL_OPTIONS": "-Da=b", "JAVA_OPTS": " -Dfoo=bar -XX:+UseZGC "})
+	if err != nil || got != "-Da=b -Dfoo=bar -XX:+UseZGC" {
+		t.Fatalf("%q %v", got, err)
+	}
+}
