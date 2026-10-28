@@ -123,3 +123,39 @@ func TestParseSize(t *testing.T) {
 		t.Fatal(Flag(1536*KiB), Flag(2*GiB))
 	}
 }
+
+func TestMemoryModes(t *testing.T) {
+	env := map[string]string{"JAVA_TOOL_OPTIONS": "-Da=b", "BPL_JVM_MEMORY_MODE": "percentage"}
+	out, err := calculator(env, "1073741824", t).Execute()
+	if err != nil || out["JAVA_TOOL_OPTIONS"] != "-Da=b -Xmx768M" {
+		t.Fatalf("%v %v", out, err)
+	}
+
+	env["BPL_JVM_HEAP_PERCENTAGE"] = "60"
+	env["BPL_JVM_PIN_HEAP"] = "true"
+	out, err = calculator(env, "1073741824", t).Execute()
+	if err != nil || out["JAVA_TOOL_OPTIONS"] != "-Da=b -Xmx614M -Xms614M" {
+		t.Fatalf("%v %v", out, err)
+	}
+
+	env["JAVA_TOOL_OPTIONS"] = "-Xmx300m"
+	out, err = calculator(env, "1073741824", t).Execute()
+	if err != nil || out != nil {
+		t.Fatalf("user -Xmx must win: %v %v", out, err)
+	}
+
+	for _, bad := range []map[string]string{
+		{"BPL_JVM_MEMORY_MODE": "percentage", "BPL_JVM_HEAP_PERCENTAGE": "99"},
+		{"BPL_JVM_MEMORY_MODE": "auto"},
+		{"BPL_JVM_PIN_HEAP": "sometimes"},
+	} {
+		if _, err := calculator(bad, "1073741824", t).Execute(); err == nil {
+			t.Fatalf("expected error for %v", bad)
+		}
+	}
+
+	out, err = calculator(map[string]string{"BPL_JVM_MEMORY_MODE": "off"}, "1073741824", t).Execute()
+	if err != nil || out != nil {
+		t.Fatalf("off must be a no-op: %v %v", out, err)
+	}
+}

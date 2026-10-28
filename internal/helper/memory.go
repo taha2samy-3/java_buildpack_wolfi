@@ -12,6 +12,12 @@ import (
 )
 
 const (
+	ModeCalculated = "calculated"
+	ModePercentage = "percentage"
+	ModeOff        = "off"
+)
+
+const (
 	KiB = int64(1024)
 	MiB = 1024 * KiB
 	GiB = 1024 * MiB
@@ -47,6 +53,17 @@ type Breakdown struct {
 }
 
 func (c MemoryCalculator) Execute() (map[string]string, error) {
+	mode := strings.ToLower(strings.TrimSpace(c.Getenv("BPL_JVM_MEMORY_MODE")))
+	if mode == "" {
+		mode = ModeCalculated
+	}
+	if mode != ModeCalculated && mode != ModePercentage && mode != ModeOff {
+		return nil, fmt.Errorf("BPL_JVM_MEMORY_MODE must be %s, %s or %s, got %q", ModeCalculated, ModePercentage, ModeOff, mode)
+	}
+	if mode == ModeOff {
+		return nil, nil
+	}
+
 	total, source, err := c.totalMemory()
 	if err != nil {
 		return nil, err
@@ -58,16 +75,71 @@ func (c MemoryCalculator) Execute() (map[string]string, error) {
 
 	opts := Options(c.Getenv("JAVA_TOOL_OPTIONS") + " " + c.Getenv("JDK_JAVA_OPTIONS"))
 
-	b, flags, err := c.Calculate(total, opts)
+	var flags []string
+	if mode == ModePercentage {
+		var heap int64
+		heap, flags, err = c.Percentage(total, opts)
+		if err != nil {
+			return nil, err
+		}
+		fmt.Fprintf(c.Log, "Memory calculator (percentage, %s %s): heap %s\n", source, Size(total), Size(heap))
+	} else {
+		var b Breakdown
+		b, flags, err = c.Calculate(total, opts)
+		if err != nil {
+			return nil, err
+		}
+		fmt.Fprintf(c.Log, "Memory calculator (%s %s): heap %s, metaspace %s (%d classes), code cache %s, direct %s, stack %s x %d threads, headroom %s\n",
+			source, Size(b.Total), Size(b.Heap), Size(b.Metaspace), b.Classes, Size(b.CodeCache), Size(b.Direct), Size(b.Stack), b.Threads, Size(b.Headroom))
+	}
+
+	pin, err := c.boolEnv("BPL_JVM_PIN_HEAP")
 	if err != nil {
 		return nil, err
 	}
-	fmt.Fprintf(c.Log, "Memory calculator (%s %s): heap %s, metaspace %s (%d classes), code cache %s, direct %s, stack %s x %d threads, headroom %s\n",
-		source, Size(b.Total), Size(b.Heap), Size(b.Metaspace), b.Classes, Size(b.CodeCache), Size(b.Direct), Size(b.Stack), b.Threads, Size(b.Headroom))
+	if pin && !opts.Has("-Xms") && !opts.Has("-XX:InitialHeapSize=") {
+		for _, f := range flags {
+			if strings.HasPrefix(f, "-Xmx") {
+				flags = append(flags, "-Xms"+strings.TrimPrefix(f, "-Xmx"))
+				break
+			}
+		}
+	}
+
 	if len(flags) == 0 {
 		return nil, nil
 	}
 	return map[string]string{"JAVA_TOOL_OPTIONS": Join(c.Getenv("JAVA_TOOL_OPTIONS"), flags...)}, nil
+}
+
+func (c MemoryCalculator) Percentage(total int64, opts OptionSet) (int64, []string, error) {
+	pct, err := c.intEnv("BPL_JVM_HEAP_PERCENTAGE", 75)
+	if err != nil {
+		return 0, nil, err
+	}
+	if pct < 1 || pct > 95 {
+		return 0, nil, fmt.Errorf("BPL_JVM_HEAP_PERCENTAGE must be between 1 and 95, got %d", pct)
+	}
+	if v, ok := opts.Size("-Xmx", "-XX:MaxHeapSize="); ok {
+		return v, nil, nil
+	}
+	if opts.Has("-XX:MaxRAMPercentage=") || opts.Has("-XX:MaxRAM=") {
+		return 0, nil, nil
+	}
+	heap := total * int64(pct) / 100 / MiB * MiB
+	return heap, []string{"-Xmx" + Flag(heap)}, nil
+}
+
+func (c MemoryCalculator) boolEnv(name string) (bool, error) {
+	v := strings.TrimSpace(c.Getenv(name))
+	if v == "" {
+		return false, nil
+	}
+	b, err := strconv.ParseBool(v)
+	if err != nil {
+		return false, fmt.Errorf("%s must be true or false, got %q", name, v)
+	}
+	return b, nil
 }
 
 func (c MemoryCalculator) Calculate(total int64, opts OptionSet) (Breakdown, []string, error) {

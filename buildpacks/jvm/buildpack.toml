@@ -48,6 +48,24 @@ api = "0.10"
     build = true
 
   [[metadata.configurations]]
+    name = "BPL_JVM_MEMORY_MODE"
+    description = "Heap sizing strategy: calculated (budget non-heap regions), percentage (fixed share of the limit) or off"
+    default = "calculated"
+    launch = true
+
+  [[metadata.configurations]]
+    name = "BPL_JVM_HEAP_PERCENTAGE"
+    description = "Share of total memory used for -Xmx when BPL_JVM_MEMORY_MODE=percentage (1-95)"
+    default = "75"
+    launch = true
+
+  [[metadata.configurations]]
+    name = "BPL_JVM_PIN_HEAP"
+    description = "Set -Xms equal to the calculated -Xmx so the heap is committed at startup"
+    default = "false"
+    launch = true
+
+  [[metadata.configurations]]
     name = "BPL_JVM_HEAD_ROOM"
     description = "Percentage of total memory kept free for the operating system and native allocations"
     default = "10"
