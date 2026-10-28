@@ -1,0 +1,51 @@
+---
+title: "FIPS 140-3 mode"
+description: "Approved-only cryptography with the Bouncy Castle FIPS Java API, enabled with one build variable."
+order: 40
+image: "fips.svg"
+---
+
+<Callout tone="coral" title="Off by default">
+
+Turn FIPS mode on with `BP_JVM_FIPS_ENABLED=true` at build time. It cannot be switched off at launch, so an image built in FIPS mode always runs in FIPS mode.
+
+</Callout>
+
+## The validated module
+
+The JVM uses the Bouncy Castle FIPS Java API (BC-FJA) **2.1.1**, NIST CMVP certificate **#4943** (FIPS 140-3, overall level 1). The certificate covers Java 8, 11, 17 and 21. The version is pinned on purpose: newer `bc-fips` patch releases are not covered by the certificate until NIST lists them, so the dependency updater never changes it.
+
+<FipsModules />
+
+The JSSE provider and the utility jar sit outside the cryptographic boundary. They are kept on recent releases that declare compatibility with the 2.1 module.
+
+## What changes in the JVM
+
+<Figure src="providers.svg" alt="The JDK default provider list is replaced by BCFIPS, BCJSSE and SUN" width="700" />
+
+- The provider list is replaced with `BCFIPS`, `BCJSSE` (in FIPS mode) and `SUN` for non-cryptographic services. `SunJCE`, `SunEC`, `SunRsaSign`, `SunJSSE` and `SunPKCS11` are removed.
+- `org.bouncycastle.fips.approved_only=true` disables every non-approved algorithm inside the module.
+- The default keystore type becomes `BCFKS`. The trust anchors from the runtime's `cacerts` (and any `ca-certificates` bindings) are converted into a BCFKS truststore.
+- TLS 1.0, TLS 1.1, RC4, DES, 3DES, anonymous and NULL suites, and keys below 2048 bits (224 bits for EC) are disabled.
+- `SecureRandom` is served by the BCFIPS DRBG seeded from `/dev/urandom`.
+
+<Figure src="truststore.svg" alt="cacerts and ca-certificates bindings are converted by keytool into truststore.bcfks; launch-time bindings use a copy in /tmp" caption="The truststore is converted once at build time; certificates added at launch go to a copy in /tmp." width="760" />
+
+On Java 9 and newer the jars are placed on the module path through `JDK_JAVA_OPTIONS`. On Java 8 they are added to the extension directories. The rest of the JDK's `java.security` is kept, so new JDK defaults are not lost.
+
+## Build-time self-test
+
+After configuring the layer, the buildpack starts the launch runtime with the final options and checks that:
+
+- `BCFIPS` and `BCJSSE` are the first two providers and `SunJCE` is gone,
+- approved-only mode is active,
+- AES-GCM and `SecureRandom` come from `BCFIPS`,
+- generating an RSA-1024 key fails,
+- the default `SSLContext` is `BCJSSE`,
+- the BCFKS truststore loads trust anchors.
+
+Any failure stops the build.
+
+## Limits
+
+FIPS 140-3 compliance is a property of a whole system, not of an image. This buildpack gives the JVM a validated module in approved-only mode. It does not make the operating system, glibc, OpenSSL in other processes or your application logic FIPS validated. Code that loads its own crypto provider, bundles non-FIPS Bouncy Castle jars, or uses `MD5` from the `SUN` provider for non-security purposes needs review. Check with your assessor which components are in scope.

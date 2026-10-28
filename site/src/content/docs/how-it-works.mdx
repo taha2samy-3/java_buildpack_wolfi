@@ -1,0 +1,45 @@
+---
+title: "How it works"
+description: "What happens during detect, build and launch, and what ends up in the image."
+order: 30
+image: "lifecycle.svg"
+---
+
+## Images
+
+| Image | Purpose |
+| --- | --- |
+| `wolfi-build` | Wolfi with glibc, bash and CA certificates. Runs the buildpacks as user `cnb` (1001). |
+| `wolfi-run` | Built from scratch with only `glibc`, `libstdc++`, `zlib`, `tzdata`, CA certificates and the Wolfi base layout. No shell, no package manager. The apk database is kept so Grype, Trivy and Syft can scan it. |
+| `wolfi-jvm-buildpack` | Installs the JDK and JRE, configures FIPS mode and adds the launch helpers. |
+| `wolfi-java-buildpack` | Composite buildpack: CA certificates, the JVM, Syft, the build tools and the application buildpacks. |
+| `wolfi-java-builder` | All of the above plus the CNB lifecycle, for `pack build`. |
+
+<Figure src="stack.svg" alt="Image layers from bottom to top: Wolfi run image, Eclipse Temurin, FIPS 140-3, launch helpers, application" caption="Layers of an application image, bottom to top." width="620" />
+
+## Detect
+
+The JVM buildpack always passes detection and offers `jdk` and `jre`. It never requires its own provisions, so it participates only when another buildpack asks for a JVM, for example Maven asking for a JDK and the executable JAR buildpack asking for a JRE.
+
+## Build
+
+1. Resolve the Java version from `BP_JVM_VERSION` or the project files.
+2. Install the Temurin **JDK** in a build-only, cached layer when a build tool needs it.
+3. Install the Temurin **JRE** (or JDK when `BP_JVM_TYPE=JDK`) in a launch layer.
+4. With `BP_JVM_FIPS_ENABLED=true`, add a `fips` layer with the Bouncy Castle jars, a `java.security` override generated from the runtime's own file, and a BCFKS truststore converted from the runtime's `cacerts`. Then run the self-test against the launch runtime.
+5. Add a `helper` layer with three `exec.d` programs.
+6. Write a CycloneDX SBOM for every layer.
+
+Downloads are verified with SHA-256 before use. Archives are extracted with path traversal and symlink escape checks, and group/world-writable bits are dropped. A layer is reused from cache only when its metadata (artifact checksum, CA bindings, self-test) is unchanged.
+
+## Launch
+
+Before the application process starts, the CNB launcher runs the `exec.d` helpers in order:
+
+<Figure src="launch.svg" alt="The launcher runs 0-ca-certificates, 1-memory-calculator and 2-jvm-options before starting java" width="560" />
+
+1. `0-ca-certificates` adds certificates from `ca-certificates` bindings and `BPL_JVM_CA_CERTIFICATES`.
+2. `1-memory-calculator` sizes the JVM from the container limit. See [Memory](memory.html).
+3. `2-jvm-options` turns `BPL_*` switches (JMX, JDWP, JFR, NMT, heap dumps) into JVM flags.
+
+Each helper is a static Go binary, so it works without a shell and with a read-only root filesystem.
