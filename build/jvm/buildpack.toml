@@ -159,6 +159,11 @@ api = "0.10"
     launch = true
 
   [[metadata.configurations]]
+    name = "JAVA_OPTS"
+    description = "Extra JVM options appended to JAVA_TOOL_OPTIONS at launch"
+    launch = true
+
+  [[metadata.configurations]]
     name = "BPL_HEAP_DUMP_PATH"
     description = "Directory or file used for heap dumps on OutOfMemoryError (disabled when unset)"
     launch = true
