@@ -260,6 +260,11 @@ td code { white-space: nowrap; }
 .release-body h2 { font-size: 1.3rem; margin-top: 1.2em; }
 .release-body h2::before { display: none; }
 .release-body h3 { font-size: 1.05rem; color: var(--coral); }
+.release-body { min-width: 0; overflow-wrap: anywhere; }
+.release-body table { display: block; max-width: 100%; overflow-x: auto; border: 1px solid #2c2c2c; border-radius: var(--radius); }
+.release-body td:first-child, .release-body th:first-child { white-space: nowrap; width: 1%; }
+.release-body td code { white-space: normal; word-break: break-all; }
+.release-body pre { max-width: 100%; }
 
 .footer { border-top: 1px solid #262626; padding: 44px 0 60px; color: var(--muted); font-size: .9rem; }
 .footer-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; }
