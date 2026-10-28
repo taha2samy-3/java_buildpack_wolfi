@@ -106,9 +106,9 @@ func (f Fetcher) fetchOnce(ctx context.Context, src, want string) (string, error
 	}
 	ok := false
 	defer func() {
-		out.Close()
+		_ = out.Close()
 		if !ok {
-			os.Remove(out.Name())
+			_ = os.Remove(out.Name())
 		}
 	}()
 
@@ -142,6 +142,9 @@ func (f Fetcher) fetchOnce(ctx context.Context, src, want string) (string, error
 	}
 	if got := hex.EncodeToString(h.Sum(nil)); got != want {
 		return "", checksumError{want, got}
+	}
+	if err := out.Close(); err != nil {
+		return "", err
 	}
 	ok = true
 	return out.Name(), nil

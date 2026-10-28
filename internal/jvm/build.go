@@ -372,7 +372,7 @@ func (b Builder) fipsLayer(bgctx context.Context, ctx libcnb.BuildContext, f Fet
 				return layer, err
 			}
 			err = CopyFile(file, filepath.Join(libDir, filepath.Base(d.URI)), 0o644)
-			os.Remove(file)
+			_ = os.Remove(file)
 			if err != nil {
 				return layer, err
 			}

@@ -13,8 +13,12 @@ linters:
         - (io.Closer).Close
         - (*os.File).Close
         - (*archive/zip.ReadCloser).Close
+        - (*compress/gzip.Reader).Close
         - os.Remove
         - os.RemoveAll
+        - fmt.Fprintf
+        - fmt.Fprintln
+        - fmt.Fprint
     gosec:
       excludes:
         - G110
