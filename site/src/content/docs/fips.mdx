@@ -31,7 +31,7 @@ The JSSE provider and the utility jar sit outside the cryptographic boundary. Th
 
 <Figure src="truststore.svg" alt="cacerts and ca-certificates bindings are converted by keytool into truststore.bcfks; launch-time bindings use a copy in /tmp" caption="The truststore is converted once at build time; certificates added at launch go to a copy in /tmp." width="760" />
 
-On Java 9 and newer the jars are placed on the module path through `JDK_JAVA_OPTIONS`. On Java 8 they are added to the extension directories. The rest of the JDK's `java.security` is kept, so new JDK defaults are not lost.
+On Java 9 and newer the jars are placed on the module path through `JDK_JAVA_OPTIONS`. On Java 8 they are added to the extension directories, and `org.bouncycastle.jsse.client.assumeOriginalHostName=true` is set so `HttpsURLConnection` keeps SNI and hostname verification working with BCJSSE (see CVE-2024-34447). The rest of the JDK's `java.security` is kept, so new JDK defaults are not lost.
 
 ## Build-time self-test
 

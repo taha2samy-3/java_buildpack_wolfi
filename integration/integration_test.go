@@ -197,9 +197,11 @@ func run(t *testing.T, builder string, s scenario) {
 	}
 
 	if s.checkTLS {
-		body, err := get(base+"/tls", time.Minute)
-		if err != nil || !strings.Contains(body, "status=200") {
-			t.Errorf("outbound TLS failed: %v\n%s", err, body)
+		for _, target := range []string{"https://repo1.maven.org/maven2/", "https://www.google.com/", "https://github.com/"} {
+			body, err := get(base+"/tls?url="+target, time.Minute)
+			if err != nil || !strings.Contains(body, "status=") || strings.Contains(body, "error=") {
+				t.Errorf("outbound TLS to %s failed: %v\n%s", target, err, body)
+			}
 		}
 	}
 

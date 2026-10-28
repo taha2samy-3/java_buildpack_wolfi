@@ -445,7 +445,10 @@ func FipsOptions(java, home, fipsDir string, jars []string) (tool []string, laun
 		"-Djavax.net.ssl.trustStorePassword=" + TruststorePassword,
 	}
 	if java == "8" {
-		tool = append(tool, "-Djava.ext.dirs="+ExtDir(home)+string(os.PathListSeparator)+filepath.Join(fipsDir, "lib"))
+		tool = append(tool,
+			"-Djava.ext.dirs="+ExtDir(home)+string(os.PathListSeparator)+filepath.Join(fipsDir, "lib"),
+			"-Dorg.bouncycastle.jsse.client.assumeOriginalHostName=true",
+		)
 		return tool, nil
 	}
 	launcher = []string{"--module-path=" + strings.Join(jars, string(os.PathListSeparator)), "--add-modules=ALL-MODULE-PATH"}

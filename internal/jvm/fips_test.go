@@ -57,7 +57,7 @@ func TestFipsOptions(t *testing.T) {
 	}
 
 	tool, launcher = FipsOptions("8", "/l/jre", "/l/fips", nil)
-	if launcher != nil || !strings.Contains(strings.Join(tool, " "), "-Djava.ext.dirs=/l/jre/lib/ext:/l/fips/lib") {
+	if launcher != nil || !strings.Contains(strings.Join(tool, " "), "-Djava.ext.dirs=/l/jre/lib/ext:/l/fips/lib") || !strings.Contains(strings.Join(tool, " "), "assumeOriginalHostName=true") {
 		t.Fatal(tool, launcher)
 	}
 }
