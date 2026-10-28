@@ -306,3 +306,8 @@ td code { white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
+
+.vars td:nth-child(1) { width: 34%; }
+.vars td:nth-child(2) { width: 18%; }
+.vars td:nth-child(2) code { white-space: normal; word-break: break-all; }
+.vars td:nth-child(1) code { white-space: normal; word-break: break-word; }

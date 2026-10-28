@@ -1,9 +1,11 @@
 ---
 import Docs from '../layouts/Docs.astro';
 import ReleaseList from '../components/ReleaseList.astro';
+import Figure from '../components/Figure.astro';
 import { data, url } from '../lib/site.js';
 ---
-<Docs title="Releases" description="Every published release with its images, digests, runtimes and verification commands. This page is regenerated automatically each time a release is published." current="releases" image="release-pipeline.svg">
+<Docs title="Releases" description="Every published release with its images, digests, runtimes and verification commands. This page is regenerated automatically each time a release is published." current="releases">
   <p data-reveal>Machine-readable feed: <a href={url('releases.json')}>releases.json</a>. Source of truth: <a href={`https://github.com/${data.repository}/releases`}>GitHub Releases</a>.</p>
+  <Figure src="release-pipeline.svg" alt="Release pipeline: tag, CI, stacks and buildpacks, builder, SLSA provenance, signing and SBOM, GitHub release, docs" caption="Pushing a version tag runs this pipeline; the last step regenerates this page." width="860" />
   <ReleaseList />
 </Docs>
