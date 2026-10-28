@@ -1,0 +1,21 @@
+---
+import { url } from '../lib/site.js';
+const items = [
+  { tone: 'coral', title: 'Optional FIPS 140-3', text: 'One switch turns on approved-only mode with the CMVP validated Bouncy Castle FIPS module, a BCFKS truststore and a build-time self-test.', href: 'fips', link: 'FIPS mode', img: 'fips.svg' },
+  { tone: 'yellow', title: 'Java 8 to 25', text: 'Every Eclipse Temurin LTS release, JDK or JRE, for amd64 and arm64, pinned by SHA-256 and refreshed weekly.', href: 'getting-started', link: 'Get started' },
+  { tone: 'mint', title: 'Container-aware memory', text: 'Heap, metaspace, threads and code cache sized from the cgroup limit at launch, or a fixed percentage when you prefer.', href: 'memory', link: 'Memory', img: 'memory.svg' },
+  { tone: 'sky', title: 'Distroless run image', text: 'Wolfi glibc base with no shell and no package manager, a non-root user and an apk database scanners can read.', href: 'how-it-works', link: 'How it works' },
+  { tone: 'lime', title: 'SLSA Build Level 3', text: 'Isolated provenance, keyless Sigstore signatures and CycloneDX SBOM attestations for every published image.', href: 'security', link: 'Verify a release', img: 'supply-chain.svg' },
+  { tone: 'amber', title: 'Every Java build tool', text: 'Maven, Gradle, sbt, executable JARs, WARs on Tomcat, dist-zip and Procfile, powered by Paketo buildpacks.', href: 'configuration', link: 'Configure' },
+];
+---
+<div class="features">
+  {items.map((f, i) => (
+    <a class={`feature feature-${f.tone}`} href={url(f.href)} data-reveal data-delay={String(i % 3)}>
+      {f.img && <img class="feature-art" src={url(`images/${f.img}`)} alt="" loading="lazy" />}
+      <h3>{f.title}</h3>
+      <p>{f.text}</p>
+      <span class="feature-link">{f.link} <span aria-hidden="true">→</span></span>
+    </a>
+  ))}
+</div>

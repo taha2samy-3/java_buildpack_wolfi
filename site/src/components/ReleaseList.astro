@@ -1,0 +1,33 @@
+---
+import { releases, url } from '../lib/site.js';
+const { limit } = Astro.props;
+const list = limit ? releases.slice(0, limit) : releases;
+const latest = releases.find((r) => !r.prerelease)?.tag;
+const date = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+{list.length === 0 ? (
+  <div class="card card-empty" data-reveal><p>No releases have been published yet. Releases appear here automatically when a version tag is pushed.</p></div>
+) : limit ? (
+  <div class="cards">
+    {list.map((r) => (
+      <a class="card card-link" href={`${url('releases')}#${r.tag}`} data-reveal>
+        <span class:list={['chip', { 'chip-coral': r.tag === latest }]}>{r.tag}</span>
+        <span class="muted">{date(r.published)}</span>
+      </a>
+    ))}
+  </div>
+) : (
+  <div class="releases">
+    {list.map((r) => (
+      <article class:list={['release', { 'release-latest': r.tag === latest }]} id={r.tag} data-reveal>
+        <header>
+          <h2><a href={r.url}>{r.tag}</a></h2>
+          {r.tag === latest && <span class="chip chip-coral pulse">latest</span>}
+          {r.prerelease && <span class="chip chip-yellow">pre-release</span>}
+          <time datetime={r.published}>{date(r.published)}</time>
+        </header>
+        <div class="release-body" set:html={r.html} />
+      </article>
+    ))}
+  </div>
+)}

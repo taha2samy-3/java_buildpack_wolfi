@@ -1,0 +1,77 @@
+---
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import '../styles/prism.css';
+import Logo from '../components/Logo.astro';
+import { data, url } from '../lib/site.js';
+
+const { title, description, image = 'images/og.png', current } = Astro.props;
+const fullTitle = title ? `${title} · Wolfi Java Buildpack` : 'Wolfi Java Buildpack';
+const nav = [
+  ['getting-started', 'Get started'],
+  ['configuration', 'Configuration'],
+  ['how-it-works', 'How it works'],
+  ['fips', 'FIPS'],
+  ['memory', 'Memory'],
+  ['security', 'Supply chain'],
+  ['releases', 'Releases'],
+];
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(url(image), Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#1a1a1a" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('apple-touch-icon.png')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href={url()}>
+          <Logo size={36} animated />
+          <span><strong>wolfi</strong> java buildpack</span>
+        </a>
+        <button class="menu" aria-label="Menu" aria-expanded="false" data-menu><span></span><span></span><span></span></button>
+        <nav class="nav" data-nav>
+          {nav.map(([slug, label]) => (
+            <a href={url(slug)} aria-current={current === slug ? 'page' : undefined}>{label}</a>
+          ))}
+          <a class="nav-cta" href={`https://github.com/${data.repository}`}>GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <div id="main">
+      <slot />
+    </div>
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <div>
+          <a class="brand" href={url()}><Logo size={28} /><span><strong>wolfi</strong> java buildpack</span></a>
+          <p>Apache-2.0 · v{data.latest} · generated {data.generated}</p>
+          <p><a href={`https://github.com/${data.repository}`}>Source</a> · <a href={`https://github.com/${data.repository}/security`}>Security</a> · <a href={url('releases')}>Releases</a></p>
+        </div>
+        <p class="legal">Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates. Eclipse Temurin and Adoptium are trademarks of the Eclipse Foundation. Bouncy Castle is a trademark of its respective owner. Wolfi is a project of Chainguard. Paketo is a Cloud Foundry Foundation project. This project is independent and not affiliated with or endorsed by any of them.</p>
+      </div>
+    </footer>
+    <script>
+      import '../scripts/motion.js';
+    </script>
+  </body>
+</html>

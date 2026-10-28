@@ -1,0 +1,9 @@
+---
+import Docs from '../layouts/Docs.astro';
+import ReleaseList from '../components/ReleaseList.astro';
+import { data, url } from '../lib/site.js';
+---
+<Docs title="Releases" description="Every published release with its images, digests, runtimes and verification commands. This page is regenerated automatically each time a release is published." current="releases" image="release-pipeline.svg">
+  <p data-reveal>Machine-readable feed: <a href={url('releases.json')}>releases.json</a>. Source of truth: <a href={`https://github.com/${data.repository}/releases`}>GitHub Releases</a>.</p>
+  <ReleaseList />
+</Docs>
