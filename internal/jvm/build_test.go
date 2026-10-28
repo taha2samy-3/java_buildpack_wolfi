@@ -1,6 +1,7 @@
 package jvm
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/buildpacks/libcnb/v2"
@@ -67,6 +68,18 @@ func TestDetect(t *testing.T) {
 	for _, p := range r.Plans {
 		if len(p.Requires) != 0 {
 			t.Fatal("detect must not require its own provisions")
+		}
+	}
+}
+
+func TestLaunchEnvironmentAppendKeepsAllOptions(t *testing.T) {
+	env := libcnb.Environment{}
+	tool, _ := FipsOptions("21", "/l/jre", "/l/fips", []string{"/l/fips/lib/a.jar"})
+	env.Append("JAVA_TOOL_OPTIONS", " ", strings.Join(tool, " "))
+	got := env["JAVA_TOOL_OPTIONS.append"]
+	for _, o := range tool {
+		if !strings.Contains(got, o) {
+			t.Fatalf("%s missing from %q", o, got)
 		}
 	}
 }

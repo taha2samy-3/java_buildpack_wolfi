@@ -425,9 +425,7 @@ func (b Builder) fipsLayer(bgctx context.Context, ctx libcnb.BuildContext, f Fet
 
 	layer.Metadata = want
 	layer.LayerTypes = libcnb.LayerTypes{Launch: true}
-	for _, o := range toolOptions {
-		layer.LaunchEnvironment.Append("JAVA_TOOL_OPTIONS", " ", o)
-	}
+	layer.LaunchEnvironment.Append("JAVA_TOOL_OPTIONS", " ", strings.Join(toolOptions, " "))
 	if len(launcherOptions) > 0 {
 		layer.LaunchEnvironment.Append("JDK_JAVA_OPTIONS", " ", strings.Join(launcherOptions, " "))
 	}

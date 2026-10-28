@@ -206,7 +206,7 @@ func (c MemoryCalculator) Calculate(total int64, opts OptionSet) (Breakdown, []s
 		return b, flags, nil
 	}
 
-	b.Heap = total - nonHeap
+	b.Heap = (total - nonHeap) / MiB * MiB
 	if b.Heap < 32*MiB {
 		return b, nil, fmt.Errorf("insufficient memory: total %s, required non-heap %s (headroom %s, direct %s, code cache %s, metaspace %s, stack %s x %d threads); increase the memory limit or lower BPL_JVM_THREAD_COUNT",
 			Size(total), Size(nonHeap), Size(b.Headroom), Size(b.Direct), Size(b.CodeCache), Size(b.Metaspace), Size(b.Stack), b.Threads)

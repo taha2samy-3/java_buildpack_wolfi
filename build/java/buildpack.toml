@@ -3,7 +3,7 @@ api = "0.10"
 [buildpack]
   id = "taha2samy-3/wolfi-java"
   name = "Wolfi Java Buildpack"
-  version = "0.0.0-dev"
+  version = "dev"
   homepage = "https://github.com/taha2samy-3/java_buildpack_wolfi"
   description = "Builds Maven, Gradle, sbt, executable JAR, WAR, dist-zip and Procfile Java applications on Wolfi"
   keywords = ["java", "maven", "gradle", "spring-boot", "fips", "wolfi"]
@@ -19,7 +19,7 @@ api = "0.10"
     optional = true
   [[order.group]]
     id = "taha2samy-3/wolfi-jvm"
-    version = "0.0.0-dev"
+    version = "dev"
   [[order.group]]
     id = "paketo-buildpacks/syft"
     version = "2.43.4"
@@ -83,7 +83,7 @@ api = "0.10"
     optional = true
   [[order.group]]
     id = "taha2samy-3/wolfi-jvm"
-    version = "0.0.0-dev"
+    version = "dev"
   [[order.group]]
     id = "paketo-buildpacks/syft"
     version = "2.43.4"
@@ -147,7 +147,7 @@ api = "0.10"
     optional = true
   [[order.group]]
     id = "taha2samy-3/wolfi-jvm"
-    version = "0.0.0-dev"
+    version = "dev"
   [[order.group]]
     id = "paketo-buildpacks/syft"
     version = "2.43.4"
@@ -179,7 +179,7 @@ api = "0.10"
     optional = true
   [[order.group]]
     id = "taha2samy-3/wolfi-jvm"
-    version = "0.0.0-dev"
+    version = "dev"
   [[order.group]]
     id = "paketo-buildpacks/syft"
     version = "2.43.4"
@@ -227,7 +227,7 @@ api = "0.10"
     optional = true
   [[order.group]]
     id = "taha2samy-3/wolfi-jvm"
-    version = "0.0.0-dev"
+    version = "dev"
   [[order.group]]
     id = "paketo-buildpacks/syft"
     version = "2.43.4"
@@ -271,7 +271,7 @@ api = "0.10"
     optional = true
   [[order.group]]
     id = "taha2samy-3/wolfi-jvm"
-    version = "0.0.0-dev"
+    version = "dev"
   [[order.group]]
     id = "paketo-buildpacks/syft"
     version = "2.43.4"
@@ -303,7 +303,7 @@ api = "0.10"
     optional = true
   [[order.group]]
     id = "taha2samy-3/wolfi-jvm"
-    version = "0.0.0-dev"
+    version = "dev"
   [[order.group]]
     id = "paketo-buildpacks/syft"
     version = "2.43.4"

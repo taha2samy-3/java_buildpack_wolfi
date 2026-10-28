@@ -37,8 +37,8 @@ func TestCalculateDefaults(t *testing.T) {
 		t.Fatalf("metaspace %d", b.Metaspace)
 	}
 	nonHeap := GiB/10 + 10*MiB + 240*MiB + wantMeta + 250*MiB
-	if b.Heap != GiB-nonHeap {
-		t.Fatalf("heap %d want %d", b.Heap, GiB-nonHeap)
+	if b.Heap != (GiB-nonHeap)/MiB*MiB {
+		t.Fatalf("heap %d want %d", b.Heap, (GiB-nonHeap)/MiB*MiB)
 	}
 	got := strings.Join(flags, " ")
 	for _, want := range []string{"-Xmx", "-Xss1M", "-XX:MaxDirectMemorySize=10M", "-XX:ReservedCodeCacheSize=240M", "-XX:MaxMetaspaceSize="} {

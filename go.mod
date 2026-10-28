@@ -11,5 +11,6 @@ require (
 require (
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/onsi/gomega v1.38.2 // indirect
+	github.com/yuin/goldmark v1.8.6 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
 )

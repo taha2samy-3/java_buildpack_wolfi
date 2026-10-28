@@ -3,7 +3,7 @@ api = "0.10"
 [buildpack]
   id = "taha2samy-3/wolfi-jvm"
   name = "Wolfi JVM Buildpack"
-  version = "0.0.0-dev"
+  version = "dev"
   homepage = "https://github.com/taha2samy-3/java_buildpack_wolfi"
   description = "Eclipse Temurin JDK/JRE for Wolfi stacks with optional FIPS 140-3 mode backed by the Bouncy Castle FIPS module"
   keywords = ["java", "jvm", "jre", "jdk", "fips", "wolfi"]
@@ -46,6 +46,24 @@ api = "0.10"
     name = "BP_DEPENDENCY_MIRROR"
     description = "Base URL of a mirror that replaces the scheme and host of dependency download URIs"
     build = true
+
+  [[metadata.configurations]]
+    name = "BPL_JVM_MEMORY_MODE"
+    description = "Heap sizing strategy: calculated (budget non-heap regions), percentage (fixed share of the limit) or off"
+    default = "calculated"
+    launch = true
+
+  [[metadata.configurations]]
+    name = "BPL_JVM_HEAP_PERCENTAGE"
+    description = "Share of total memory used for -Xmx when BPL_JVM_MEMORY_MODE=percentage (1-95)"
+    default = "75"
+    launch = true
+
+  [[metadata.configurations]]
+    name = "BPL_JVM_PIN_HEAP"
+    description = "Set -Xms equal to the calculated -Xmx so the heap is committed at startup"
+    default = "false"
+    launch = true
 
   [[metadata.configurations]]
     name = "BPL_JVM_HEAD_ROOM"
