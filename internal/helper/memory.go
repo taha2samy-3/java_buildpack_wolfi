@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/taha2samy/java_buildpack_wolfi/internal/classcount"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/classcount"
 )
 
 const (
@@ -43,7 +43,7 @@ func NewMemoryCalculator() MemoryCalculator {
 
 type Breakdown struct {
 	Total, Heap, Headroom, Direct, Metaspace, CodeCache, Stack int64
-	Threads, Classes                                         int
+	Threads, Classes                                           int
 }
 
 func (c MemoryCalculator) Execute() (map[string]string, error) {

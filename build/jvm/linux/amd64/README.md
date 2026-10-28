@@ -1,0 +1,45 @@
+# Hardened FIPS Java Buildpack
+
+This buildpack provides a highly secure Java Runtime Environment (JRE) designed for environments requiring FIPS 140-3 compliance. It integrates BouncyCastle FIPS cryptographic modules and enforces strict security policies while maintaining enterprise-grade observability and performance tuning.
+
+<img width="1016" height="553" alt="003c9d3592ba4abbbdea72058c6783f0" src="https://github.com/user-attachments/assets/a7e27c2b-fc2e-4193-8cc3-34d99da32896" />
+
+## Supported Environment Variables
+
+| Variable | Description | Default |
+| :--- | :--- | :--- |
+| `BP_JVM_TYPE`| `JRE` or `JDK` | --- |
+| `BP_JVM_VERSION` | java version | 21 |
+| `BPL_JVM_HEAD_ROOM` | Percentage of memory to leave as headroom for the OS (0-100). | `25` |
+| `BPL_JAVA_NMT_ENABLED` | Enables Native Memory Tracking (NMT). | `true` |
+| `BPL_JAVA_NMT_LEVEL` | Detail level for NMT output (`summary` or `detail`). | `summary` |
+| `BPL_JMX_ENABLED` | Enables remote JMX monitoring. | `false` |
+| `BPL_JMX_PORT` | Port for JMX monitoring. | `5000` |
+| `BPL_DEBUG_ENABLED` | Enables remote debugging support. | `false` |
+| `BPL_DEBUG_PORT` | Port for remote debugging. | `8000` |
+| `BPL_DEBUG_SUSPEND` | Whether the JVM should wait for a debugger to attach. | `false` |
+| `BPL_JFR_ENABLED` | Enables Java Flight Recording (JFR). | `false` |
+| `BPL_HEAP_DUMP_PATH` | Path to write heap dumps on OutOfMemoryError. | (Disabled) |
+
+---
+
+## Built-in Optimizations and Hardening
+The buildpack automatically configures the following low-level settings for container stability:
+*   **FIPS Enforcement:** Enforces BouncyCastle FIPS as the primary provider and disables non-approved cryptographic algorithms.
+*   **Dynamic Memory Calculator:** Includes an integrated python-compiled memory calculator via the CNB `exec.d` lifecycle layer. It dynamically parses cgroups limits and automatically configures exact `-Xmx` and `-Xms` options.
+*   **Memory Arena Management:** Sets `MALLOC_ARENA_MAX=2` to reduce memory fragmentation and prevent excessive virtual memory growth in containers.
+*   **DNS TTL Fix:** Sets the network address cache TTL to 60 seconds to ensure the JVM respects DNS changes in dynamic environments like Kubernetes.
+*   **Encoding:** Forces `UTF-8` file encoding globally.
+
+---
+
+## Comparison with Paketo (BellSoft Liberica)
+
+### Active Feature Parity
+1.  **Integrated Memory Calculator:** Fully matches Paketo's behavior by utilizing a native dynamic memory calculator that executes during the container launch phase (`exec.d`). This bypasses the old container percentage configurations (`MaxRAMPercentage`) and strictly controls JRE heap allocation relative to host boundaries.
+
+### Missing Features
+1.  **Jlink Support:** This buildpack does not support the `jlink` tool for creating custom, minified JRE distributions at build time.
+
+### GraalVM Support
+*   **No GraalVM / Native Image:** This buildpack does not include GraalVM or support for compiling applications into Native Images. It is strictly optimized for standard JRE/JDK execution with FIPS compliance.

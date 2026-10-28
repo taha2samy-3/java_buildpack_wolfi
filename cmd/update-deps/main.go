@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/taha2samy/java_buildpack_wolfi/internal/manifest"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/manifest"
 )
 
 const marker = "[[metadata.dependencies]]"
@@ -211,7 +211,7 @@ func get(ctx context.Context, u string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "taha2samy-wolfi-jvm-update-deps")
+	req.Header.Set("User-Agent", "taha2samy-3-wolfi-jvm-update-deps")
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err

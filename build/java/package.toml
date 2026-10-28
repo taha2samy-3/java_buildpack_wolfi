@@ -1,0 +1,64 @@
+[buildpack]
+  uri = "."
+
+[[dependencies]]
+  uri = "docker://local/wolfi-jvm-buildpack:dev"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/ca-certificates:3.14.4@sha256:d2ffc1985eac7e9bdecdf96c57995f865d7d55565caec2ca63bcc6f3175c80c7"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/syft:2.43.4@sha256:756ba4e4ca66d96ba73c79cec7a375b62177ee2bef1a800ab51ce59a047b9e39"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/maven:6.26.0@sha256:3c9ff8a48a54b43a62fe6916de9aa767df56fa5fbff666c9ec47066968810159"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/gradle:8.10.0@sha256:65ca3aedd09baaf9b7a7cfba6b9b19b9da5be6b16e01714f93368dce50330a94"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/sbt:6.25.3@sha256:92b98d5adf30c71c8e1e509751c8f867013041c872dd0b47730bec58fd599192"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/executable-jar:6.17.5@sha256:45efc64a3b1093cc4c356a297d6a15ba2b04667837337410b8129311ea8c457a"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/spring-boot:5.40.4@sha256:58916921a1d30707eb971c11ac22f135a0657389fd906a8d7ed69dc14cf71087"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/apache-tomcat:8.12.5@sha256:47f728e6bbc0be43f474f4ca3ebf28baada2893fb6c7b45c9cf66c1607416000"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/dist-zip:5.14.4@sha256:ebe6228be7ce2dfbb136be4a3ff4ccbdf98992147ea982c467ac597643fb6904"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/procfile:5.15.6@sha256:b6787593342683b5c7b00a7a2386a0d407355c8b15b3b6665ab7d1a8d3e91ffc"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/jattach:1.13.6@sha256:90eee2b75cab6817594b70195877aeac36b136ba728ed4bbaebb6d4938443daf"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/azure-application-insights:6.3.2@sha256:22669d2f36953ff7be67f768f2fc060a24395eaeebd479412e815247a32d7558"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/google-stackdriver:10.3.1@sha256:0e37acff4a3a2b745b3f3e480c99f880c7443ba6e54e9d5532726730a648520f"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/datadog:6.15.1@sha256:b4529bda0285443bdc62ed00f82eed0470da669643128b9881555e8612635b00"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/java-memory-assistant:1.12.5@sha256:81e1250ae83bdc4be802cd995748158fcb1016cdd8fbd6508d5307b55d187c9d"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/environment-variables:4.12.1@sha256:050945de1043a1c0043f0bda49a9ddbd2aa02f5e6b1c4fdadfdba6428f2c9b3b"
+
+[[dependencies]]
+  uri = "docker://docker.io/paketobuildpacks/image-labels:4.14.5@sha256:e3b717e01ff8ecac5ec15743e92d094803adb8c0d8e3b59a3907b9150af6830c"
+
+[[targets]]
+  os = "linux"
+  arch = "amd64"
+
+[[targets]]
+  os = "linux"
+  arch = "arm64"

@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}
 
 ARG CNB_USER_ID=1001
 ARG CNB_GROUP_ID=1001
-ARG STACK_ID=io.github.taha2samy.stacks.wolfi
+ARG STACK_ID=io.github.taha2samy-3.stacks.wolfi
 
 USER root
 RUN apk add --no-cache \
@@ -27,10 +27,10 @@ ENV CNB_USER_ID=${CNB_USER_ID} \
 
 LABEL io.buildpacks.stack.id="${STACK_ID}" \
       io.buildpacks.base.distro.name="wolfi" \
-      io.buildpacks.base.homepage="https://github.com/taha2samy/java_buildpack_wolfi" \
-      io.buildpacks.base.maintainer="taha2samy" \
+      io.buildpacks.base.homepage="https://github.com/taha2samy-3/java_buildpack_wolfi" \
+      io.buildpacks.base.maintainer="taha2samy-3" \
       org.opencontainers.image.title="Wolfi CNB build image" \
-      org.opencontainers.image.source="https://github.com/taha2samy/java_buildpack_wolfi" \
+      org.opencontainers.image.source="https://github.com/taha2samy-3/java_buildpack_wolfi" \
       org.opencontainers.image.licenses="Apache-2.0"
 
 USER ${CNB_USER_ID}:${CNB_GROUP_ID}

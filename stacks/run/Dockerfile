@@ -22,8 +22,8 @@ RUN mkdir -p /rootfs/etc/apk \
       zlib \
  && ldconfig -r /rootfs \
  && rm -rf /rootfs/etc/apk/keys /rootfs/var/cache/apk \
- && grep -q '^cnb:' /rootfs/etc/passwd || echo "cnb:x:${CNB_USER_ID}:${CNB_GROUP_ID}:cnb:/home/cnb:/sbin/nologin" >> /rootfs/etc/passwd \
- && grep -q '^cnb:' /rootfs/etc/group || echo "cnb:x:${CNB_GROUP_ID}:" >> /rootfs/etc/group \
+ && { grep -q '^cnb:' /rootfs/etc/passwd || echo "cnb:x:${CNB_USER_ID}:${CNB_GROUP_ID}:cnb:/home/cnb:/sbin/nologin" >> /rootfs/etc/passwd; } \
+ && { grep -q '^cnb:' /rootfs/etc/group || echo "cnb:x:${CNB_GROUP_ID}:" >> /rootfs/etc/group; } \
  && mkdir -p /rootfs/home/cnb /rootfs/tmp \
  && chown ${CNB_USER_ID}:${CNB_GROUP_ID} /rootfs/home/cnb \
  && chmod 1777 /rootfs/tmp
@@ -32,7 +32,7 @@ FROM scratch
 
 ARG CNB_USER_ID=1001
 ARG CNB_GROUP_ID=1001
-ARG STACK_ID=io.github.taha2samy.stacks.wolfi
+ARG STACK_ID=io.github.taha2samy-3.stacks.wolfi
 
 COPY --from=rootfs /rootfs /
 
@@ -44,10 +44,10 @@ ENV CNB_USER_ID=${CNB_USER_ID} \
 
 LABEL io.buildpacks.stack.id="${STACK_ID}" \
       io.buildpacks.base.distro.name="wolfi" \
-      io.buildpacks.base.homepage="https://github.com/taha2samy/java_buildpack_wolfi" \
-      io.buildpacks.base.maintainer="taha2samy" \
+      io.buildpacks.base.homepage="https://github.com/taha2samy-3/java_buildpack_wolfi" \
+      io.buildpacks.base.maintainer="taha2samy-3" \
       org.opencontainers.image.title="Wolfi CNB run image (distroless)" \
-      org.opencontainers.image.source="https://github.com/taha2samy/java_buildpack_wolfi" \
+      org.opencontainers.image.source="https://github.com/taha2samy-3/java_buildpack_wolfi" \
       org.opencontainers.image.licenses="Apache-2.0"
 
 USER ${CNB_USER_ID}:${CNB_GROUP_ID}

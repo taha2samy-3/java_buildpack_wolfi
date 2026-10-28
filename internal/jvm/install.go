@@ -19,7 +19,7 @@ import (
 
 	"github.com/buildpacks/libcnb/v2"
 
-	"github.com/taha2samy/java_buildpack_wolfi/internal/manifest"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/manifest"
 )
 
 type Fetcher struct {
@@ -123,7 +123,7 @@ func (f Fetcher) fetchOnce(ctx context.Context, src, want string) (string, error
 		if err != nil {
 			return "", err
 		}
-		req.Header.Set("User-Agent", "taha2samy-wolfi-jvm-buildpack")
+		req.Header.Set("User-Agent", "taha2samy-3-wolfi-jvm-buildpack")
 		resp, err := f.Client.Do(req)
 		if err != nil {
 			return "", err

@@ -25,7 +25,9 @@ func TestConfigure(t *testing.T) {
 		check   func(Config) bool
 	}{
 		{"maven", nil, []libcnb.BuildpackPlanEntry{{Name: "jdk"}, {Name: "jre", Metadata: map[string]any{"launch": true}}},
-			func(c Config) bool { return c.NeedJDK && c.Launch && c.Type == "JRE" && !c.FIPS && c.Java.Version == "21" && c.Arch == "arm64" }},
+			func(c Config) bool {
+				return c.NeedJDK && c.Launch && c.Type == "JRE" && !c.FIPS && c.Java.Version == "21" && c.Arch == "arm64"
+			}},
 		{"build only", nil, []libcnb.BuildpackPlanEntry{{Name: "jdk"}},
 			func(c Config) bool { return c.NeedJDK && !c.Launch }},
 		{"jre without metadata launches", nil, []libcnb.BuildpackPlanEntry{{Name: "jre"}},

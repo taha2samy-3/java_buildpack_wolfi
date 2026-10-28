@@ -14,9 +14,9 @@ import (
 
 	"github.com/buildpacks/libcnb/v2"
 
-	"github.com/taha2samy/java_buildpack_wolfi/internal/certs"
-	"github.com/taha2samy/java_buildpack_wolfi/internal/classcount"
-	"github.com/taha2samy/java_buildpack_wolfi/internal/manifest"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/certs"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/classcount"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/manifest"
 )
 
 const (

@@ -1,4 +1,4 @@
-module github.com/taha2samy/java_buildpack_wolfi
+module github.com/taha2samy-3/java_buildpack_wolfi
 
 go 1.26.4
 

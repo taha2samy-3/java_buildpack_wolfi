@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/buildpacks/libcnb/v2"
 
-	"github.com/taha2samy/java_buildpack_wolfi/internal/jvm"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/jvm"
 )
 
 func main() {

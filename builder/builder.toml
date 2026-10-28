@@ -1,0 +1,26 @@
+description = "Wolfi Java builder: Eclipse Temurin with optional FIPS 140-3 mode on distroless Wolfi run images"
+
+[build]
+  image = "{{BUILD_IMAGE}}"
+
+[[run.images]]
+  image = "{{RUN_IMAGE}}"
+
+[lifecycle]
+  uri = "docker://docker.io/buildpacksio/lifecycle:0.21.26@sha256:5861a5565fdc1f4e776d62583cdbd0a92a1ddc2da25ac53b7ef731b8f118708d"
+
+[[targets]]
+  os = "linux"
+  arch = "amd64"
+
+[[targets]]
+  os = "linux"
+  arch = "arm64"
+
+[[buildpacks]]
+  uri = "{{JAVA_BUILDPACK}}"
+
+[[order]]
+  [[order.group]]
+    id = "taha2samy-3/wolfi-java"
+    version = "{{VERSION}}"

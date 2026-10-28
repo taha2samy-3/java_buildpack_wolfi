@@ -1,17 +1,17 @@
 api = "0.10"
 
 [buildpack]
-  id = "taha2samy/wolfi-jvm"
+  id = "taha2samy-3/wolfi-jvm"
   name = "Wolfi JVM Buildpack"
   version = "{{VERSION}}"
-  homepage = "https://github.com/taha2samy/java_buildpack_wolfi"
+  homepage = "https://github.com/taha2samy-3/java_buildpack_wolfi"
   description = "Eclipse Temurin JDK/JRE for Wolfi stacks with optional FIPS 140-3 mode backed by the Bouncy Castle FIPS module"
   keywords = ["java", "jvm", "jre", "jdk", "fips", "wolfi"]
   sbom-formats = ["application/vnd.cyclonedx+json"]
 
   [[buildpack.licenses]]
     type = "Apache-2.0"
-    uri = "https://github.com/taha2samy/java_buildpack_wolfi/blob/main/LICENSE"
+    uri = "https://github.com/taha2samy-3/java_buildpack_wolfi/blob/main/LICENSE"
 
 [[targets]]
   os = "linux"

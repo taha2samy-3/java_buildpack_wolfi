@@ -3,7 +3,7 @@ package jvm
 import (
 	"testing"
 
-	"github.com/taha2samy/java_buildpack_wolfi/internal/manifest"
+	"github.com/taha2samy-3/java_buildpack_wolfi/internal/manifest"
 )
 
 func mustManifest(t *testing.T) manifest.Manifest {
