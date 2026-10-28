@@ -1,45 +1,92 @@
-# Hardened FIPS Java Buildpack
+<p align="center">
+  <img src="site/public/images/og.png" alt="Wolfi Java Buildpack" width="720">
+</p>
 
-This buildpack provides a highly secure Java Runtime Environment (JRE) designed for environments requiring FIPS 140-3 compliance. It integrates BouncyCastle FIPS cryptographic modules and enforces strict security policies while maintaining enterprise-grade observability and performance tuning.
+<p align="center">
+  <a href="https://github.com/taha2samy-3/java_buildpack_wolfi/actions/workflows/ci.yml"><img src="https://github.com/taha2samy-3/java_buildpack_wolfi/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://slsa.dev/spec/v1.0/levels#build-l3"><img src="https://slsa.dev/images/gh-badge-level3.svg" alt="SLSA 3"></a>
+  <a href="https://scorecard.dev/viewer/?uri=github.com/taha2samy-3/java_buildpack_wolfi"><img src="https://api.scorecard.dev/projects/github.com/taha2samy-3/java_buildpack_wolfi/badge" alt="OpenSSF Scorecard"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-ff9371" alt="Apache-2.0"></a>
+</p>
 
-<img width="1016" height="553" alt="003c9d3592ba4abbbdea72058c6783f0" src="https://github.com/user-attachments/assets/a7e27c2b-fc2e-4193-8cc3-34d99da32896" />
+# Wolfi Java Buildpack
 
-## Supported Environment Variables
+A [Cloud Native Buildpack](https://buildpacks.io) that turns Java source code or JARs into minimal, signed, non-root container images on [Wolfi](https://github.com/wolfi-dev), with an optional FIPS 140-3 mode backed by the CMVP validated Bouncy Castle FIPS module.
 
-| Variable | Description | Default |
-| :--- | :--- | :--- |
-| `BP_JVM_TYPE`| `JRE` or `JDK` | --- |
-| `BP_JVM_VERSION` | java version | 21 |
-| `BPL_JVM_HEAD_ROOM` | Percentage of memory to leave as headroom for the OS (0-100). | `25` |
-| `BPL_JAVA_NMT_ENABLED` | Enables Native Memory Tracking (NMT). | `true` |
-| `BPL_JAVA_NMT_LEVEL` | Detail level for NMT output (`summary` or `detail`). | `summary` |
-| `BPL_JMX_ENABLED` | Enables remote JMX monitoring. | `false` |
-| `BPL_JMX_PORT` | Port for JMX monitoring. | `5000` |
-| `BPL_DEBUG_ENABLED` | Enables remote debugging support. | `false` |
-| `BPL_DEBUG_PORT` | Port for remote debugging. | `8000` |
-| `BPL_DEBUG_SUSPEND` | Whether the JVM should wait for a debugger to attach. | `false` |
-| `BPL_JFR_ENABLED` | Enables Java Flight Recording (JFR). | `false` |
-| `BPL_HEAP_DUMP_PATH` | Path to write heap dumps on OutOfMemoryError. | (Disabled) |
+**Documentation: https://taha2samy-3.github.io/java_buildpack_wolfi/**
 
----
+```sh
+pack build my-app --builder ghcr.io/taha2samy-3/wolfi-java-builder:latest
+pack build my-app --builder ghcr.io/taha2samy-3/wolfi-java-builder:latest --env BP_JVM_FIPS_ENABLED=true
+```
 
-## Built-in Optimizations and Hardening
-The buildpack automatically configures the following low-level settings for container stability:
-*   **FIPS Enforcement:** Enforces BouncyCastle FIPS as the primary provider and disables non-approved cryptographic algorithms.
-*   **Dynamic Memory Calculator:** Includes an integrated python-compiled memory calculator via the CNB `exec.d` lifecycle layer. It dynamically parses cgroups limits and automatically configures exact `-Xmx` and `-Xms` options.
-*   **Memory Arena Management:** Sets `MALLOC_ARENA_MAX=2` to reduce memory fragmentation and prevent excessive virtual memory growth in containers.
-*   **DNS TTL Fix:** Sets the network address cache TTL to 60 seconds to ensure the JVM respects DNS changes in dynamic environments like Kubernetes.
-*   **Encoding:** Forces `UTF-8` file encoding globally.
+## Features
 
----
+- Eclipse Temurin JDK and JRE for every LTS release (8, 11, 17, 21, 25), amd64 and arm64, pinned by SHA-256.
+- Optional FIPS 140-3 mode: Bouncy Castle FIPS Java API 2.1.1 (CMVP #4943) in approved-only mode, BCJSSE, a BCFKS truststore and a build-time self-test that fails the build if the configuration is wrong.
+- Container-aware memory sizing at launch, with `calculated`, `percentage` (75% by default) and `off` modes.
+- Distroless Wolfi run image: glibc, no shell, no package manager, non-root user `1001`, read-only root filesystem friendly.
+- Runtime switches for JMX, JDWP, JFR, NMT and heap dumps, bound to loopback by default.
+- Custom CA certificates through `ca-certificates` service bindings at build or launch time.
+- Air-gapped builds through `BP_DEPENDENCY_MIRROR` and `dependency-mapping` bindings.
+- SLSA Build Level 3 provenance, keyless Sigstore signatures and CycloneDX SBOM attestations for every release image.
 
-## Comparison with Paketo (BellSoft Liberica)
+## Images
 
-### Active Feature Parity
-1.  **Integrated Memory Calculator:** Fully matches Paketo's behavior by utilizing a native dynamic memory calculator that executes during the container launch phase (`exec.d`). This bypasses the old container percentage configurations (`MaxRAMPercentage`) and strictly controls JRE heap allocation relative to host boundaries.
+| Image | Description |
+| --- | --- |
+| `ghcr.io/taha2samy-3/wolfi-java-builder` | Builder for `pack build` |
+| `ghcr.io/taha2samy-3/wolfi-java-buildpack` | Composite Java buildpack |
+| `ghcr.io/taha2samy-3/wolfi-jvm-buildpack` | JVM buildpack (`taha2samy-3/wolfi-jvm`) |
+| `ghcr.io/taha2samy-3/wolfi-build` | Build image |
+| `ghcr.io/taha2samy-3/wolfi-run` | Distroless run image |
 
-### Missing Features
-1.  **Jlink Support:** This buildpack does not support the `jlink` tool for creating custom, minified JRE distributions at build time.
+## Configuration
 
-### GraalVM Support
-*   **No GraalVM / Native Image:** This buildpack does not include GraalVM or support for compiling applications into Native Images. It is strictly optimized for standard JRE/JDK execution with FIPS compliance.
+The full, generated list lives in the [configuration guide](https://taha2samy-3.github.io/java_buildpack_wolfi/configuration). The most common variables:
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `BP_JVM_VERSION` | `21` | Java major version |
+| `BP_JVM_TYPE` | `JRE` | `JRE` or `JDK` in the final image |
+| `BP_JVM_FIPS_ENABLED` | `false` | Enable FIPS 140-3 mode |
+| `BPL_JVM_MEMORY_MODE` | `calculated` | `calculated`, `percentage` or `off` |
+| `BPL_JVM_HEAP_PERCENTAGE` | `75` | Heap share in `percentage` mode |
+| `BPL_JVM_HEAD_ROOM` | `10` | Memory kept free in `calculated` mode |
+
+## Verify a release
+
+```sh
+slsa-verifier verify-image ghcr.io/taha2samy-3/wolfi-java-builder@sha256:<digest> \
+  --source-uri github.com/taha2samy-3/java_buildpack_wolfi --source-tag v<version>
+```
+
+Each release note contains the digests and the full `cosign` commands.
+
+## Development
+
+Requirements: Go, Docker, [pack](https://buildpacks.io/docs/for-platform-operators/how-to/integrate-ci/pack/), [Task](https://taskfile.dev) and Node.js 22 for the documentation site.
+
+```sh
+task check          # gofmt, vet, unit tests
+task builder        # stack images, buildpacks and builder for the local architecture
+task integration    # build and run the sample applications against the local builder
+task update-deps    # refresh pinned Temurin releases
+```
+
+Documentation site:
+
+```sh
+go run ./cmd/site data --offline
+cd site && npm ci && npm run dev
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+
+## Trademarks
+
+Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates. Eclipse Temurin and Adoptium are trademarks of the Eclipse Foundation. Bouncy Castle is a trademark of its respective owner. Wolfi is a project of Chainguard. Paketo is a Cloud Foundry Foundation project. This project is independent and not affiliated with or endorsed by any of them.
+
+## License
+
+[Apache-2.0](LICENSE)
