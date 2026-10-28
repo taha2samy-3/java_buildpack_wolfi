@@ -9,7 +9,9 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -17,6 +19,11 @@ import (
 )
 
 const marker = "[[metadata.dependencies]]"
+
+var (
+	javaVersionsLine = regexp.MustCompile(`(?m)^(\s*java-versions = )\[.*\]`)
+	supportedList    = regexp.MustCompile(`(Java major version to install \()[0-9, ]+\)`)
+)
 
 var archs = map[string]string{"amd64": "x64", "arm64": "aarch64"}
 
@@ -57,6 +64,23 @@ func run(dir string) error {
 		return err
 	}
 
+	var releases struct {
+		LTS []int `json:"available_lts_releases"`
+	}
+	if err := getJSON(ctx, "https://api.adoptium.net/v3/info/available_releases", &releases); err != nil {
+		return err
+	}
+	var versions []string
+	for _, v := range releases.LTS {
+		if v >= 8 {
+			versions = append(versions, strconv.Itoa(v))
+		}
+	}
+	if len(versions) == 0 {
+		return fmt.Errorf("adoptium returned no LTS releases")
+	}
+	m.JavaVersions = versions
+
 	var deps []manifest.Dependency
 	for _, d := range m.Dependencies {
 		if d.ID != "jdk" && d.ID != "jre" {
@@ -82,6 +106,12 @@ func run(dir string) error {
 		return err
 	}
 	head, _, _ := strings.Cut(string(raw), marker)
+	quoted := make([]string, len(versions))
+	for i, v := range versions {
+		quoted[i] = strconv.Quote(v)
+	}
+	head = javaVersionsLine.ReplaceAllString(head, "${1}["+strings.Join(quoted, ", ")+"]")
+	head = supportedList.ReplaceAllString(head, "${1}"+strings.Join(versions, ", ")+")")
 
 	var b strings.Builder
 	b.WriteString(strings.TrimRight(head, "\n"))
