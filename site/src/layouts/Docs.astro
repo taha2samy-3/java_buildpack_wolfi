@@ -1,0 +1,50 @@
+---
+import Base from './Base.astro';
+import { url } from '../lib/site.js';
+
+const { title, description, current, headings = [], image } = Astro.props;
+const pages = [
+  ['getting-started', 'Get started'],
+  ['configuration', 'Configuration'],
+  ['how-it-works', 'How it works'],
+  ['fips', 'FIPS 140-3 mode'],
+  ['memory', 'Memory'],
+  ['security', 'Supply chain'],
+  ['releases', 'Releases'],
+];
+const index = pages.findIndex(([slug]) => slug === current);
+const prev = index > 0 ? pages[index - 1] : undefined;
+const next = index >= 0 && index < pages.length - 1 ? pages[index + 1] : undefined;
+const toc = headings.filter((h) => h.depth === 2);
+---
+<Base title={title} description={description} current={current}>
+  <div class="wrap docs">
+    <aside class="sidebar">
+      <p class="sidebar-title">Documentation</p>
+      {pages.map(([slug, label]) => (
+        <a href={url(slug)} aria-current={current === slug ? 'page' : undefined}>{label}</a>
+      ))}
+    </aside>
+    <main class="content">
+      <p class="crumb"><a href={url()}>Home</a> / {title}</p>
+      <div class="doc-head">
+        <div>
+          <h1 class="rise">{title}</h1>
+          <p class="lead rise rise-2">{description}</p>
+        </div>
+        {image && <img class="doc-art rise rise-3" src={url(`images/${image}`)} alt="" />}
+      </div>
+      <slot />
+      <nav class="pager">
+        {prev ? <a class="pager-link" href={url(prev[0])}><span class="muted">Previous</span><strong>← {prev[1]}</strong></a> : <span></span>}
+        {next && <a class="pager-link pager-next" href={url(next[0])}><span class="muted">Next</span><strong>{next[1]} →</strong></a>}
+      </nav>
+    </main>
+    {toc.length > 1 && (
+      <aside class="toc">
+        <p class="sidebar-title">On this page</p>
+        {toc.map((h) => <a href={`#${h.slug}`} data-toc={h.slug}>{h.text}</a>)}
+      </aside>
+    )}
+  </div>
+</Base>

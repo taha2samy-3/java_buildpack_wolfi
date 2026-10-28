@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import Features from '../components/Features.astro';
+import Runtimes from '../components/Runtimes.astro';
+import ReleaseList from '../components/ReleaseList.astro';
+import Logo from '../components/Logo.astro';
+import stack from '../../public/images/stack.svg?raw';
+import { data, url, builder } from '../lib/site.js';
+
+const description = 'A Cloud Native Buildpack that turns Java source code or JARs into minimal, signed, non-root container images on Wolfi, with an optional FIPS 140-3 mode backed by a validated cryptographic module.';
+const output = [
+  ['muted', '===> DETECTING'],
+  ['', 'taha2samy-3/wolfi-jvm   ' + data.latest],
+  ['', 'paketo-buildpacks/maven'],
+  ['muted', '===> BUILDING'],
+  ['', 'Java 21 (from pom.xml), runtime JRE, FIPS true'],
+  ['ok', 'PASS  approved-only mode is active'],
+  ['ok', 'PASS  RSA-1024 key generation is rejected'],
+  ['ok', 'FIPS self-test: all checks passed'],
+  ['muted', '===> EXPORTING'],
+  ['accent', "Successfully built image 'my-app'"],
+];
+---
+<Base description={description}>
+  <section class="hero">
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow rise"><span class="chip chip-coral">v{data.latest}</span> Cloud Native Buildpacks · Wolfi · Eclipse Temurin</p>
+        <h1 class="rise rise-2">Java images that are <em>small</em>, <em>signed</em> and <em>FIPS&#8209;ready</em>.</h1>
+        <p class="lead rise rise-3">{description}</p>
+        <div class="actions rise rise-4">
+          <a class="button button-primary" href={url('getting-started')}>Get started <span aria-hidden="true">→</span></a>
+          <a class="button button-ghost" href={url('fips')}>FIPS 140-3 mode</a>
+        </div>
+      </div>
+      <div class="hero-logo rise rise-3" aria-hidden="true">
+        <Logo size={260} animated />
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="terminal rise rise-4">
+        <div class="terminal-bar"><i></i><i></i><i></i><span>zsh</span></div>
+        <pre class="terminal-body"><code><span class="prompt">$ </span><span data-typing={`pack build my-app --builder ${builder} --env BP_JVM_FIPS_ENABLED=true`}>pack build my-app --builder {builder} --env BP_JVM_FIPS_ENABLED=true</span><span class="caret" aria-hidden="true"></span>
+{output.map(([tone, line]) => <span class:list={['out', tone]} data-out>{line}{'\n'}</span>)}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap home">
+    <section>
+      <p class="kicker" data-reveal>Why this buildpack</p>
+      <h2 data-reveal>Everything a production Java image needs, nothing it does not.</h2>
+      <Features />
+    </section>
+
+    <section class="split">
+      <div>
+        <p class="kicker" data-reveal>Inside the image</p>
+        <h2 data-reveal>Five layers, each one cached, scanned and replaceable.</h2>
+        <p data-reveal>The run image is Wolfi with glibc and nothing else: no shell, no package manager, a non-root user. On top sit the Temurin runtime, the optional FIPS layer, three small launch helpers and your application split into dependency slices, so a code change only ships the layer that changed.</p>
+        <p data-reveal><a class="button button-ghost" href={url('how-it-works')}>How it works</a></p>
+      </div>
+      <div class="stack-art" data-reveal set:html={stack} />
+    </section>
+
+    <section>
+      <p class="kicker" data-reveal>Runtimes</p>
+      <h2 data-reveal>Every Temurin LTS, pinned by checksum.</h2>
+      <Runtimes />
+    </section>
+
+    <section class="cta" data-reveal>
+      <div>
+        <h2>Verify before you deploy.</h2>
+        <p>Every release ships SLSA Build Level 3 provenance, Sigstore signatures and CycloneDX SBOMs for all five images.</p>
+      </div>
+      <a class="button button-dark" href={url('security')}>Supply chain <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section>
+      <p class="kicker" data-reveal>Latest releases</p>
+      <ReleaseList limit={3} />
+    </section>
+  </main>
+</Base>

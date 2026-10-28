@@ -1,0 +1,8 @@
+---
+import { url } from '../lib/site.js';
+const { src, alt, caption, width } = Astro.props;
+---
+<figure class="figure" data-reveal>
+  <img src={url(`images/${src}`)} alt={alt} loading="lazy" decoding="async" width={width} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

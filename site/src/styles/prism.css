@@ -1,0 +1,11 @@
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6f6f6f; font-style: italic; }
+.token.punctuation { color: #9a9a9a; }
+.token.property, .token.tag, .token.constant, .token.symbol, .token.deleted { color: #ff9371; }
+.token.boolean, .token.number { color: #ffc06c; }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #b6ff9f; }
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string, .token.variable { color: #95ffec; }
+.token.atrule, .token.attr-value, .token.function, .token.class-name { color: #ffedba; }
+.token.keyword { color: #c5eaff; }
+.token.regex, .token.important { color: #ffc06c; }
+.token.important, .token.bold { font-weight: 700; }
+.token.italic { font-style: italic; }

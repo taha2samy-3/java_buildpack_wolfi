@@ -1,0 +1,7 @@
+---
+const { tone = 'yellow', title } = Astro.props;
+---
+<aside class={`callout callout-${tone}`} data-reveal>
+  {title && <p class="callout-title">{title}</p>}
+  <slot />
+</aside>

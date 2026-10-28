@@ -1,0 +1,13 @@
+---
+import { data } from '../lib/site.js';
+---
+<div class="table-wrap" data-reveal>
+  <table>
+    <thead><tr><th>Component</th><th>Version</th><th>SHA-256</th></tr></thead>
+    <tbody>
+      {data.fips.map((m) => (
+        <tr><td>{m.name}</td><td><code>{m.version}</code></td><td><code class="hash">{m.sha256}</code></td></tr>
+      ))}
+    </tbody>
+  </table>
+</div>

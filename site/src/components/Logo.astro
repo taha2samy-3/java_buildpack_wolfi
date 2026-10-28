@@ -1,0 +1,9 @@
+---
+const { size = 36, animated = false } = Astro.props;
+---
+<svg class:list={['logo', { 'logo-animated': animated }]} width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+  <rect width="64" height="64" rx="16" fill="#1a1a1a" />
+  <path class="logo-l3" d="M12 40.5 32 51l20-10.5V46L32 56.5 12 46Z" fill="#95ffec" />
+  <path class="logo-l2" d="M12 28.5 32 39l20-10.5v5.5L32 44.5 12 34Z" fill="#ffc06c" />
+  <path class="logo-l1" d="M32 10 52 20.5 32 31 12 20.5Z" fill="#ff9371" />
+</svg>

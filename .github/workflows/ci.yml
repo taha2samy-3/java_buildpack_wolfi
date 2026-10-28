@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+
+permissions: {}
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - name: gofmt
+        run: test -z "$(gofmt -l .)" || { gofmt -d .; exit 1; }
+      - run: go vet ./...
+      - run: go test -race -coverprofile=coverage.out ./...
+      - name: govulncheck
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.1.4 ./...
+      - uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
+        with:
+          version: v2.15.0
+      - name: Verify the dependency manifest is well formed
+        run: go test ./internal/manifest/ -run TestBuildpackManifest -v
+
+  integration:
+    name: Integration (${{ matrix.scenario }})
+    needs: unit
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario:
+          - maven-fips-java8
+          - maven-fips-java11
+          - maven-fips-java17
+          - maven-fips-java21
+          - maven-fips-java25
+          - maven-default-java21
+          - maven-jdk-runtime
+          - maven-percentage-memory
+          - maven-runtime-ca-binding
+          - gradle-spring-boot-fips
+    steps:
+      - uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: buildpacks/github-actions/setup-pack@324e5c43145b68f60bf74a269f5ba7b2969e03db # v6.2.1
+      - name: Build stack images
+        run: |
+          docker build -t local/wolfi-build:ci stacks/build
+          docker build -t local/wolfi-run:ci stacks/run
+      - name: Package buildpacks and builder
+        run: |
+          ./scripts/package.sh jvm 0.0.0-ci build/jvm amd64
+          pack buildpack package local/wolfi-jvm-buildpack:ci --path build/jvm --target linux/amd64
+          ./scripts/package.sh render buildpacks/java/buildpack.toml build/java/buildpack.toml VERSION=0.0.0-ci
+          ./scripts/package.sh render buildpacks/java/package.toml build/java/package.toml JVM_BUILDPACK=docker://local/wolfi-jvm-buildpack:ci
+          cp LICENSE build/java/
+          pack buildpack package local/wolfi-java-buildpack:ci --config build/java/package.toml --target linux/amd64 --pull-policy if-not-present
+          ./scripts/package.sh render builder/builder.toml build/builder/builder.toml VERSION=0.0.0-ci BUILD_IMAGE=local/wolfi-build:ci RUN_IMAGE=local/wolfi-run:ci JAVA_BUILDPACK=docker://local/wolfi-java-buildpack:ci
+          pack builder create local/wolfi-java-builder:ci --config build/builder/builder.toml --target linux/amd64 --pull-policy if-not-present
+      - name: Run scenario
+        env:
+          BUILDER: local/wolfi-java-builder:ci
+        run: go test -tags integration -count=1 -timeout 40m -v -run "TestScenarios/${{ matrix.scenario }}$" ./integration/...

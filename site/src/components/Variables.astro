@@ -1,0 +1,19 @@
+---
+import { data } from '../lib/site.js';
+const { kind = 'build' } = Astro.props;
+const list = kind === 'build' ? data.build : data.launch;
+---
+<div class="table-wrap" data-reveal>
+  <table class="vars">
+    <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      {list.map((v) => (
+        <tr id={v.name}>
+          <td><a class="anchor" href={`#${v.name}`}><code>{v.name}</code></a></td>
+          <td>{v.default ? <code>{v.default}</code> : <span class="muted">unset</span>}</td>
+          <td>{v.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

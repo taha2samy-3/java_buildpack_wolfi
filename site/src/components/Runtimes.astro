@@ -1,0 +1,12 @@
+---
+import { data } from '../lib/site.js';
+---
+<div class="cards cards-runtimes">
+  {data.runtimes.map((r, i) => (
+    <div class="card card-runtime" data-reveal data-delay={String(i % 6)}>
+      <span class="big">{r.java}</span>
+      <span class="chip chip-mint">LTS</span>
+      <dl><dt>JDK</dt><dd>{r.jdk}</dd><dt>JRE</dt><dd>{r.jre}</dd></dl>
+    </div>
+  ))}
+</div>
