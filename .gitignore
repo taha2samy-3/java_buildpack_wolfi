@@ -1,0 +1,13 @@
+/build/
+/dist/
+*.class
+!/buildpacks/jvm/selftest/*.java
+.gradle/
+target/
+samples/**/build/
+*.cnb
+*.log
+.idea/
+.vscode/
+.DS_Store
+/site/_site/

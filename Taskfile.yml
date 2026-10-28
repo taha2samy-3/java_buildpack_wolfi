@@ -1,0 +1,68 @@
+version: '3'
+
+vars:
+  VERSION: '{{.VERSION | default "0.0.0-dev"}}'
+  REGISTRY: '{{.REGISTRY | default "local"}}'
+  ARCH: '{{.ARCH | default "amd64"}}'
+  BUILD_IMAGE: '{{.REGISTRY}}/wolfi-build:{{.VERSION}}'
+  RUN_IMAGE: '{{.REGISTRY}}/wolfi-run:{{.VERSION}}'
+  JVM_BUILDPACK: '{{.REGISTRY}}/wolfi-jvm-buildpack:{{.VERSION}}'
+  JAVA_BUILDPACK: '{{.REGISTRY}}/wolfi-java-buildpack:{{.VERSION}}'
+  BUILDER: '{{.REGISTRY}}/wolfi-java-builder:{{.VERSION}}'
+
+tasks:
+  default:
+    cmds:
+      - task: check
+
+  check:
+    desc: Format check, vet and unit tests
+    cmds:
+      - test -z "$(gofmt -l .)"
+      - go vet ./...
+      - go test -race -cover ./...
+
+  lint:
+    desc: Run golangci-lint and govulncheck
+    cmds:
+      - golangci-lint run
+      - go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+
+  update-deps:
+    desc: Refresh pinned Temurin releases in buildpacks/jvm/buildpack.toml
+    cmds:
+      - go run ./cmd/update-deps
+
+  stacks:
+    desc: Build the build and run images for the local architecture
+    cmds:
+      - docker build -t {{.BUILD_IMAGE}} stacks/build
+      - docker build -t {{.RUN_IMAGE}} stacks/run
+
+  buildpack:
+    desc: Package the JVM buildpack and the Java composite buildpack locally
+    cmds:
+      - ./scripts/package.sh jvm {{.VERSION}} build/jvm {{.ARCH}}
+      - pack buildpack package {{.JVM_BUILDPACK}} --path build/jvm --target linux/{{.ARCH}}
+      - ./scripts/package.sh render buildpacks/java/buildpack.toml build/java/buildpack.toml VERSION={{.VERSION}}
+      - ./scripts/package.sh render buildpacks/java/package.toml build/java/package.toml JVM_BUILDPACK=docker://{{.JVM_BUILDPACK}}
+      - cp LICENSE build/java/
+      - pack buildpack package {{.JAVA_BUILDPACK}} --config build/java/package.toml --target linux/{{.ARCH}} --pull-policy if-not-present
+
+  builder:
+    desc: Create the builder from local images
+    deps: [stacks, buildpack]
+    cmds:
+      - ./scripts/package.sh render builder/builder.toml build/builder/builder.toml VERSION={{.VERSION}} BUILD_IMAGE={{.BUILD_IMAGE}} RUN_IMAGE={{.RUN_IMAGE}} JAVA_BUILDPACK=docker://{{.JAVA_BUILDPACK}}
+      - pack builder create {{.BUILDER}} --config build/builder/builder.toml --target linux/{{.ARCH}} --pull-policy if-not-present
+
+  integration:
+    desc: Build the sample applications with the local builder and verify them
+    deps: [builder]
+    cmds:
+      - BUILDER={{.BUILDER}} go test -tags integration -count=1 -timeout 60m -v ./integration/...
+
+  clean:
+    desc: Remove build outputs
+    cmds:
+      - rm -rf build
