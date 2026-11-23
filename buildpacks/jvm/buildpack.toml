@@ -204,239 +204,239 @@ api = "0.10"
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "8.0.504+1"
+  version = "8.0.514+1"
   java = "8"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jdk_x64_linux_hotspot_8u504b01.tar.gz"
-  sha256 = "9c70e102f527ac674ac2fe9c7d47b9a04e2d19842ba5ab8e9b33f368bbadfaea"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk8u504-b01?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u504-b01%2FOpenJDK8U-jdk_x64_linux_hotspot_8u504b01.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update504:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update504:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u514-b01/OpenJDK8U-jdk_x64_linux_hotspot_8u514b01.tar.gz"
+  sha256 = "27eda854481d20806d918b30cdd417c6bed4fd15882e24f3595dc8ae7fb5d095"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk8u514-b01?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u514-b01%2FOpenJDK8U-jdk_x64_linux_hotspot_8u514b01.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update514:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update514:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "8.0.504+1"
+  version = "8.0.512+9"
   java = "8"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jdk_aarch64_linux_hotspot_8u504b01.tar.gz"
-  sha256 = "57b7ed8af9d48542bb49ff7894448040b17bea0a48b41677d11ecaec6129768d"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk8u504-b01?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u504-b01%2FOpenJDK8U-jdk_aarch64_linux_hotspot_8u504b01.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update504:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update504:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u512-b09/OpenJDK8U-jdk_aarch64_linux_hotspot_8u512b09.tar.gz"
+  sha256 = "01263df22c4553f63146bbae807e70cd4628dd0d9ec7582f01cb2453f7c69aaa"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk8u512-b09?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u512-b09%2FOpenJDK8U-jdk_aarch64_linux_hotspot_8u512b09.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update512:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update512:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "8.0.504+1"
+  version = "8.0.514+1"
   java = "8"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jre_x64_linux_hotspot_8u504b01.tar.gz"
-  sha256 = "52dcd578baca1d3e449ea86768a9129c0ee04d7b22565695498353cc66940c61"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk8u504-b01?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u504-b01%2FOpenJDK8U-jre_x64_linux_hotspot_8u504b01.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update504:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update504:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u514-b01/OpenJDK8U-jre_x64_linux_hotspot_8u514b01.tar.gz"
+  sha256 = "b3e38dc60261a548fe83d297bf6faf7880f1b84f7d48e5741f3c6f3c3021cd4d"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk8u514-b01?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u514-b01%2FOpenJDK8U-jre_x64_linux_hotspot_8u514b01.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update514:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update514:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "8.0.504+1"
+  version = "8.0.512+9"
   java = "8"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jre_aarch64_linux_hotspot_8u504b01.tar.gz"
-  sha256 = "9ae9c4dd80fc8f3c4081b480c7d42346e9e4cbee5ae58198fca11e0fc1a19163"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk8u504-b01?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u504-b01%2FOpenJDK8U-jre_aarch64_linux_hotspot_8u504b01.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update504:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update504:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u512-b09/OpenJDK8U-jre_aarch64_linux_hotspot_8u512b09.tar.gz"
+  sha256 = "9b45f49bc6e54cf9170aebe0ee45f48a833222325cb3b2d6d21220eee4c5207b"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk8u512-b09?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin8-binaries%2Freleases%2Fdownload%2Fjdk8u512-b09%2FOpenJDK8U-jre_aarch64_linux_hotspot_8u512b09.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:1.8.0:update512:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:1.8.0:update512:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "11.0.32+101"
+  version = "11.0.33+100000001"
   java = "11"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.32.1_1.tar.gz"
-  sha256 = "5c3f68887c325d36d852ba534303e1f5f1f5cae7d6cc1e951d73e0d8e98a058d"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-11.0.32.1%2B1?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.32.1%252B1%2FOpenJDK11U-jdk_x64_linux_hotspot_11.0.32.1_1.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.32:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.32:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.33.1_1.tar.gz"
+  sha256 = "3119b6dd17543e8e61fd0186f9325414bf2601270bf1edf8a314b9a51c5fb89d"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-11.0.33.1%2B1?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.33.1%252B1%2FOpenJDK11U-jdk_x64_linux_hotspot_11.0.33.1_1.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.33:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.33:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "11.0.32+101"
+  version = "11.0.33+10"
   java = "11"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.32.1_1.tar.gz"
-  sha256 = "f27033e6f7523c1b0b2565a78e9c0e0abe5596a854ce00ca04ec1b06ece7a935"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-11.0.32.1%2B1?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.32.1%252B1%2FOpenJDK11U-jdk_aarch64_linux_hotspot_11.0.32.1_1.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.32:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.32:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33%2B10/OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.33_10.tar.gz"
+  sha256 = "60b0fb79bb678b6fae3e499c7b0a353e68633ed0ab69d1a6bafe6092ed1e59e4"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-11.0.33%2B10?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.33%252B10%2FOpenJDK11U-jdk_aarch64_linux_hotspot_11.0.33_10.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.33:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.33:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "11.0.32+101"
+  version = "11.0.33+100000001"
   java = "11"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jre_x64_linux_hotspot_11.0.32.1_1.tar.gz"
-  sha256 = "5eb6cf7f45c623272c64b8e7b4934a8051abb7ae73bfd28488a9856da3f4848a"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-11.0.32.1%2B1?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.32.1%252B1%2FOpenJDK11U-jre_x64_linux_hotspot_11.0.32.1_1.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.32:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.32:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jre_x64_linux_hotspot_11.0.33.1_1.tar.gz"
+  sha256 = "e32167b352a56497b0ac401409321c00948e0a4131d9d1f92abf0f901e7bf62d"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-11.0.33.1%2B1?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.33.1%252B1%2FOpenJDK11U-jre_x64_linux_hotspot_11.0.33.1_1.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.33:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.33:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "11.0.32+101"
+  version = "11.0.33+10"
   java = "11"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jre_aarch64_linux_hotspot_11.0.32.1_1.tar.gz"
-  sha256 = "0125e0d4911b9d7b11c6268cdf365a263f4794fd923d482e1b1c01b07a68b8b5"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-11.0.32.1%2B1?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.32.1%252B1%2FOpenJDK11U-jre_aarch64_linux_hotspot_11.0.32.1_1.tar.gz"
-  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.32:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.32:*:*:*:*:*:*:*"]
+  uri = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33%2B10/OpenJDK11U-jre_aarch64_linux_hotspot_11.0.33_10.tar.gz"
+  sha256 = "9691319ce9c30abe24abf679409c48467f8476b5c87ff24735efae63036e0e6b"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-11.0.33%2B10?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin11-binaries%2Freleases%2Fdownload%2Fjdk-11.0.33%252B10%2FOpenJDK11U-jre_aarch64_linux_hotspot_11.0.33_10.tar.gz"
+  cpes = ["cpe:2.3:a:eclipse:temurin:11.0.33:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:11.0.33:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "17.0.21+9"
+  version = "17.0.21+100000002"
   java = "17"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21_9.tar.gz"
-  sha256 = "8b9b611d917e3dfd8419d3566b5949226f69b052fed7e109c1368add1dfe8711"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-17.0.21%2B9?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21%252B9%2FOpenJDK17U-jdk_x64_linux_hotspot_17.0.21_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21.1_2.tar.gz"
+  sha256 = "0b0ac5eab6db6abaec68c9913bcddb31321e5da411c45073d520d9c125e6f7b4"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-17.0.21.1%2B2?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21.1%252B2%2FOpenJDK17U-jdk_x64_linux_hotspot_17.0.21.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:17.0.21:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:17.0.21:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "17.0.21+9"
+  version = "17.0.21+100000002"
   java = "17"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.21_9.tar.gz"
-  sha256 = "3e4eca7ead088f080af1476007decf010a240a1eb4e1e78c54fa32fbcc347084"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-17.0.21%2B9?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21%252B9%2FOpenJDK17U-jdk_aarch64_linux_hotspot_17.0.21_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.21.1_2.tar.gz"
+  sha256 = "1d808f4b558e9de63d8ba3ead21ffc8b9de204894eff3c19d52c1480aa17cc58"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-17.0.21.1%2B2?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21.1%252B2%2FOpenJDK17U-jdk_aarch64_linux_hotspot_17.0.21.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:17.0.21:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:17.0.21:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "17.0.21+9"
+  version = "17.0.21+100000002"
   java = "17"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jre_x64_linux_hotspot_17.0.21_9.tar.gz"
-  sha256 = "9f41bf88c7900c7097444a1bdeb84146ae692bc08842490ab098063c74bf9a8a"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-17.0.21%2B9?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21%252B9%2FOpenJDK17U-jre_x64_linux_hotspot_17.0.21_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jre_x64_linux_hotspot_17.0.21.1_2.tar.gz"
+  sha256 = "5a092a0bc21de4c3d855480edd7945be9cfe157b38cdb84dac280511893bb009"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-17.0.21.1%2B2?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21.1%252B2%2FOpenJDK17U-jre_x64_linux_hotspot_17.0.21.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:17.0.21:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:17.0.21:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "17.0.21+9"
+  version = "17.0.21+100000002"
   java = "17"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jre_aarch64_linux_hotspot_17.0.21_9.tar.gz"
-  sha256 = "1114f09d6174f54270c3117410b5e4022b43ebc0b43b751af08b927c55ed7bb5"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-17.0.21%2B9?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21%252B9%2FOpenJDK17U-jre_aarch64_linux_hotspot_17.0.21_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jre_aarch64_linux_hotspot_17.0.21.1_2.tar.gz"
+  sha256 = "ed968eb2cde06ba38c3d957956cab7faced9181aaeebed4904f89e2e6efa8d11"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-17.0.21.1%2B2?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin17-binaries%2Freleases%2Fdownload%2Fjdk-17.0.21.1%252B2%2FOpenJDK17U-jre_aarch64_linux_hotspot_17.0.21.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:17.0.21:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:17.0.21:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "21.0.13+9"
+  version = "21.0.13+100000002"
   java = "21"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13_9.tar.gz"
-  sha256 = "d7f5d5cf865a2902b70ff549b97586a7d3f234e016f041ab447ea740c7d66d1c"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-21.0.13%2B9?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13%252B9%2FOpenJDK21U-jdk_x64_linux_hotspot_21.0.13_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13.1_2.tar.gz"
+  sha256 = "bb8a93f9ae6e7a693b2b721e85dbeff26ae1a77447985a8d7afcdd9c7cf6222e"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-21.0.13.1%2B2?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13.1%252B2%2FOpenJDK21U-jdk_x64_linux_hotspot_21.0.13.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:21.0.13:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:21.0.13:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "21.0.13+9"
+  version = "21.0.13+100000002"
   java = "21"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.13_9.tar.gz"
-  sha256 = "e3522e707fc7dbe2a72c30746b1e7068301a0213ecd213d4491f35a14eb55578"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-21.0.13%2B9?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13%252B9%2FOpenJDK21U-jdk_aarch64_linux_hotspot_21.0.13_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.13.1_2.tar.gz"
+  sha256 = "8c72816a6b308842d5ed1f13e5826b69c567da4784f7238d7e800efa71fe54b1"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-21.0.13.1%2B2?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13.1%252B2%2FOpenJDK21U-jdk_aarch64_linux_hotspot_21.0.13.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:21.0.13:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:21.0.13:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "21.0.13+9"
+  version = "21.0.13+100000002"
   java = "21"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jre_x64_linux_hotspot_21.0.13_9.tar.gz"
-  sha256 = "a535a1df9c6284d9618872984e026ae0352d1f7e9e0605425c0e6114f47351dd"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-21.0.13%2B9?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13%252B9%2FOpenJDK21U-jre_x64_linux_hotspot_21.0.13_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jre_x64_linux_hotspot_21.0.13.1_2.tar.gz"
+  sha256 = "18f44fab9065217f3ba61d0eef8a7b5f3c3713aa7293001b0d4ac10ede3850f0"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-21.0.13.1%2B2?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13.1%252B2%2FOpenJDK21U-jre_x64_linux_hotspot_21.0.13.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:21.0.13:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:21.0.13:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "21.0.13+9"
+  version = "21.0.13+100000002"
   java = "21"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jre_aarch64_linux_hotspot_21.0.13_9.tar.gz"
-  sha256 = "b1734db7ade49c3f6acc6ae06233b8c2dd90e3e2f00f67000ae1c972aaa64d8c"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-21.0.13%2B9?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13%252B9%2FOpenJDK21U-jre_aarch64_linux_hotspot_21.0.13_9.tar.gz"
+  uri = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jre_aarch64_linux_hotspot_21.0.13.1_2.tar.gz"
+  sha256 = "52bc58323d9266538a6361a3cf8365fc1186dd9510d7f33f623681c4aabb7e72"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-21.0.13.1%2B2?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin21-binaries%2Freleases%2Fdownload%2Fjdk-21.0.13.1%252B2%2FOpenJDK21U-jre_aarch64_linux_hotspot_21.0.13.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:21.0.13:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:21.0.13:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "25.0.5+8"
+  version = "25.0.5+100000002"
   java = "25"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5%2B8/OpenJDK25U-jdk_x64_linux_hotspot_25.0.5_8.tar.gz"
-  sha256 = "68982529869257d0ee6b824ec5aa270ff8b118bb438670da0b97ebdab178d7fb"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-25.0.5%2B8?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5%252B8%2FOpenJDK25U-jdk_x64_linux_hotspot_25.0.5_8.tar.gz"
+  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_linux_hotspot_25.0.5.1_2.tar.gz"
+  sha256 = "760f91b22c3efc9bd1b64ff950598231be82928cc807e30691a0e7a2995a62c0"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-25.0.5.1%2B2?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5.1%252B2%2FOpenJDK25U-jdk_x64_linux_hotspot_25.0.5.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:25.0.5:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:25.0.5:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jdk"
   name = "Eclipse Temurin JDK"
-  version = "25.0.5+8"
+  version = "25.0.5+100000002"
   java = "25"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5%2B8/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.5_8.tar.gz"
-  sha256 = "bb5b2ded252f21c6090cf780b0a408ad0d83bbb557e702955643557f13231880"
-  purl = "pkg:generic/eclipse-temurin-jdk@jdk-25.0.5%2B8?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5%252B8%2FOpenJDK25U-jdk_aarch64_linux_hotspot_25.0.5_8.tar.gz"
+  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.5.1_2.tar.gz"
+  sha256 = "c37879e0d08eeb1baa69fcbb7758cd455b7b1c0ceab1e2a136ccb1713c530984"
+  purl = "pkg:generic/eclipse-temurin-jdk@jdk-25.0.5.1%2B2?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5.1%252B2%2FOpenJDK25U-jdk_aarch64_linux_hotspot_25.0.5.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:25.0.5:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:25.0.5:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "25.0.5+8"
+  version = "25.0.5+100000002"
   java = "25"
   arch = "amd64"
-  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5%2B8/OpenJDK25U-jre_x64_linux_hotspot_25.0.5_8.tar.gz"
-  sha256 = "6fac98f0c8202efc3135a9e9e42aa61963ec42d1c5cbb40caf231e7b14a24ef6"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-25.0.5%2B8?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5%252B8%2FOpenJDK25U-jre_x64_linux_hotspot_25.0.5_8.tar.gz"
+  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jre_x64_linux_hotspot_25.0.5.1_2.tar.gz"
+  sha256 = "2edef9e4f81ec5ee426d023336d4cfbd7b4644e99884e7a73a6a867b70b17acf"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-25.0.5.1%2B2?arch=amd64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5.1%252B2%2FOpenJDK25U-jre_x64_linux_hotspot_25.0.5.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:25.0.5:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:25.0.5:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
 
 [[metadata.dependencies]]
   id = "jre"
   name = "Eclipse Temurin JRE"
-  version = "25.0.5+8"
+  version = "25.0.5+100000002"
   java = "25"
   arch = "arm64"
-  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5%2B8/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.5_8.tar.gz"
-  sha256 = "963931723891302ebb2687178532c3d793d71e2577cd058061c7efb396140a86"
-  purl = "pkg:generic/eclipse-temurin-jre@jdk-25.0.5%2B8?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5%252B8%2FOpenJDK25U-jre_aarch64_linux_hotspot_25.0.5_8.tar.gz"
+  uri = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.5.1_2.tar.gz"
+  sha256 = "c6161dcfb365024fbfbcda265343d562d6f821c78dd8e7aeaeaf294893f6ff8b"
+  purl = "pkg:generic/eclipse-temurin-jre@jdk-25.0.5.1%2B2?arch=arm64\u0026download_url=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin25-binaries%2Freleases%2Fdownload%2Fjdk-25.0.5.1%252B2%2FOpenJDK25U-jre_aarch64_linux_hotspot_25.0.5.1_2.tar.gz"
   cpes = ["cpe:2.3:a:eclipse:temurin:25.0.5:*:*:*:*:*:*:*", "cpe:2.3:a:oracle:openjdk:25.0.5:*:*:*:*:*:*:*"]
   licenses = ["GPL-2.0-only WITH Classpath-exception-2.0"]
